@@ -1,0 +1,69 @@
+= Program List OCR マニュアル
+eighttails <http://eighttails.seesaa.net>
+:toc-title: 目次
+:toc:
+:numbered:
+:data-uri:
+
+by eighttails +
+http://eighttails.seesaa.net
+
+== はじめに
+本ソフトは、主に1980年代のパソコン雑誌に掲載されたプログラムリストの読み取りに特化したOCRです。 +
+紙面をスキャナで取り込み、OCRでテキストファイルにしたものをエミュレーター用のテープイメージ等に変換するという使い方を想定しています。 +
+本ソフトは、以下のオープンソースソフトウェアの組み合わせです。
+
+* Tesseract(OCRエンジン)
+* gImageReader(GUIフロントエンド)
+
+上記に加えて、独自にOCRに学習させて作成した以下の言語ファイルを含んでいます。
+
+* BASIC(PC-6001シリーズ用N6X-Basic)
+* 16進ダンプリスト
+
+BASIC言語に関しては、フォントや単語、かなやグラフィック文字の仕様などPC-6001に合わせて言語ファイルを作ってありますので、他機種のプログラムをそのまま読み込むのは難しいと思われますが、MS系のBASICで英数字のみに割り切ればもしかしたら読めるかもしれません。 +
+ダンプリストの方はBASICよりは汎用的に使えると思います。こちらは読み取り精度向上のため、16進数+α(0-9,A-F,Sum)以外の文字は使われていないという前提で読み込むようになっています。
+
+
+== 使用方法
+
+
+== 使用フォント
+今回のOCRは、Googleより配布されている英語用の言語データをベースに以下のフォントを使ってファインチューニングを行っています。 +
+ビットマップフォント、ドットマトリクス印字によるフォントに対応するためプログラムリストによく使われるフォントを追加していますが、Googleの学習済みモデルをベースにしているので、たいていの書体は読めると思います。 +
+フォント自体の再配布を行うことはできないので、学習用スクリプト内でダウンロードして使用するようになっています。 +
+
+.DotMatrix
+https://www.ffonts.net/DotMatrix-Regular.font
+
+.P6TrueTypeフォント
+Hashi様作 +
+http://p6ers.net/hashi/p6ttf.html
+
+.VLゴシック
+鈴木大輔様作 +
+http://vlgothic.dicey.org/
+
+.Takaoフォント
+https://launchpad.net/takao-fonts
+
+.PixelMPlus
+itouhiro様作 +
+http://itouhiro.hatenablog.com/entry/20130602/font
+
+.MSX風Truetypeフォント
+Gigamix様作 +
+http://www.gigamix.jp/download/gigamix/msxfont.php
+
+.P6プリンタルーチンフォント
+Mr.PCばんざーい!!様作 +
+電波新聞社刊「PC-6001・6601プログラム大全集」掲載プログラム内のフォントをeighttailsがTrueType化
+
+== 開発者情報
+=== ライセンス
+=== ビルド方法
+=== 学習方法
+
+== 更新履歴
+.1.0　2018/02/12
+* 初版 +
