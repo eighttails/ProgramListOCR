@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<Package>   
+    <DisplayName>基本コンポーネント</DisplayName>   
+    <Description>gImageReaderとOCR言語ファイル(N6X-Basici,マシン語)のセットです。</Description>   
+    <Version>1.0.0</Version>   
+    <ReleaseDate>2018-01-01</ReleaseDate>   
+    <Default>script</Default>   
+    <Licenses>     
+        <License name="gImageReader" file="GPLv3.txt" />   
+        <License name="tessract" file="ApacheLicenseV2.0.txt" />   
+    </Licenses> 
+    <Script>installscript.qs</Script> 
+</Package>

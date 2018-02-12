@@ -1,0 +1,7 @@
+training/tessdata
+training/tessdata_tmp
+installer/worktree
+installer/*.exe
+fonts/*
+*.swp
+*.lstm
