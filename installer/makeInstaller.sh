@@ -11,6 +11,9 @@ cp -r $SCRIPT_DIR/skeleton $SCRIPT_DIR/worktree
 PRODUCTDATA=$SCRIPT_DIR/worktree/packages/org.eithttails.programlistocr/data
 mkdir -p $PRODUCTDATA/bin
 
+#READMEをコピー
+cp $SCRIPT_DIR/../README.html $PRODUCTDATA
+
 #インストーラー作成作業ディレクトリにgImageReaderをビルド
 GIMAGEREADER_PREFIX=$PRODUCTDATA $SCRIPT_DIR/../setup/MSYS2Private/gimagereader/gimagereader.sh
 
