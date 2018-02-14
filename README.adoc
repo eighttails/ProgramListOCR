@@ -1,7 +1,7 @@
 = Program List OCR マニュアル
 eighttails <http://eighttails.seesaa.net>
 :toc-title: 目次
-:toc:
+:toc: left
 :numbered:
 :data-uri:
 
