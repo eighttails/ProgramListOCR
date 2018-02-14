@@ -430,22 +430,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">目次</div>
 <ul class="sectlevel1">
 <li><a href="#true-">1. はじめに</a></li>
-<li><a href="#true--2">2. 使用方法</a>
+<li><a href="#true--2">2. おことわり</a></li>
+<li><a href="#true--3">3. 使用方法</a>
 <ul class="sectlevel2">
-<li><a href="#true--3">2.1. インストール方法</a></li>
-<li><a href="#true--4">2.2. 起動方法</a></li>
-<li><a href="#true--5">2.3. 操作手順</a></li>
+<li><a href="#true--4">3.1. インストール方法</a></li>
+<li><a href="#true--5">3.2. 起動方法</a></li>
+<li><a href="#true--6">3.3. 操作手順</a></li>
 </ul>
 </li>
-<li><a href="#true--11">3. 使用フォント</a></li>
-<li><a href="#true--12">4. 開発者情報</a>
+<li><a href="#true--12">4. 使用フォント</a></li>
+<li><a href="#true--13">5. 開発者情報</a>
 <ul class="sectlevel2">
-<li><a href="#true--13">4.1. ライセンス</a></li>
-<li><a href="#true--14">4.2. ビルド方法</a></li>
-<li><a href="#true--15">4.3. 学習方法</a></li>
+<li><a href="#true--14">5.1. ライセンス</a></li>
+<li><a href="#true--15">5.2. ビルド方法</a></li>
+<li><a href="#true--16">5.3. 学習方法</a></li>
+<li><a href="#true--17">5.4. 言語ファイル作成方法</a></li>
+<li><a href="#true--18">5.5. インストーラー作成方法</a></li>
 </ul>
 </li>
-<li><a href="#true--16">5. 更新履歴</a></li>
+<li><a href="#true--19">6. 更新履歴</a></li>
 </ul>
 </div>
 </div>
@@ -496,17 +499,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="true--2"><a class="anchor" href="#true--2"></a>2. 使用方法</h2>
+<h2 id="true--2"><a class="anchor" href="#true--2"></a>2. おことわり</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>本ソフトはまだ開発版のTesseract4.0をベースに構成されています。このバージョンはまだバグが多く、安定するにはもう少し期間を要すると予想されます。<br>
+また、読み取りできるプログラムリストは紙面の状態や印字に使われているプリンタ、フォントによりかなり相性があります。その点は割り切ってご利用をお願いします。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="true--3"><a class="anchor" href="#true--3"></a>3. 使用方法</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="true--3"><a class="anchor" href="#true--3"></a>2.1. インストール方法</h3>
+<h3 id="true--4"><a class="anchor" href="#true--4"></a>3.1. インストール方法</h3>
 <div class="paragraph">
-<p>ProgramListOCR.exeをダブルクリックしてインストールします。<br>
+<p>ProgramListOCRSetup.exeをダブルクリックしてインストールします。<br>
 インストーラーの指示に従って操作すれば完了です。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="true--4"><a class="anchor" href="#true--4"></a>2.2. 起動方法</h3>
+<h3 id="true--5"><a class="anchor" href="#true--5"></a>3.2. 起動方法</h3>
 <div class="paragraph">
 <p>スタートメニューから「Program List OCR」&#8594;「gImageReader」を選択するとOCRのGUIが起動します。</p>
 </div>
@@ -517,9 +529,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="true--5"><a class="anchor" href="#true--5"></a>2.3. 操作手順</h3>
+<h3 id="true--6"><a class="anchor" href="#true--6"></a>3.3. 操作手順</h3>
 <div class="sect3">
-<h4 id="true--6"><a class="anchor" href="#true--6"></a>2.3.1. 画像スキャン、前処理</h4>
+<h4 id="true--7"><a class="anchor" href="#true--7"></a>3.3.1. 画像スキャン、前処理</h4>
 <div class="paragraph">
 <p>読み込む対象のプログラムが掲載された紙面をスキャンします。<br>
 スキャン後はテキストの傾き、ゆがみがなるべく無い様に補正してください。<br>
@@ -527,8 +539,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <a href="http://eighttails.seesaa.net/article/283953696.html" class="bare">http://eighttails.seesaa.net/article/283953696.html</a></p>
 </div>
 <div class="paragraph">
-<p>推奨する形式は、600DPI、グレースケール、TIFFまたは高画質設定のJPEGです。<br>
-文字が薄い場合、GIMPを使って補正すると読み取り精度が上がります。<br>
+<p>推奨する形式は</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>600DPI</p>
+</li>
+<li>
+<p>グレースケール</p>
+</li>
+<li>
+<p>TIFFまたは高画質設定のJPEG</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>です。<br>
+文字が薄い場合、 <a href="http://www.gimp.org">GIMP</a> を使って補正すると読み取り精度が上がります。<br>
 GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明るさの最大値」を実行するとかすれた文字を補正することができます。</p>
 </div>
 <div class="imageblock">
@@ -548,7 +576,7 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 </div>
 </div>
 <div class="sect3">
-<h4 id="true--7"><a class="anchor" href="#true--7"></a>2.3.2. 画像読み込み</h4>
+<h4 id="true--8"><a class="anchor" href="#true--8"></a>3.3.2. 画像読み込み</h4>
 <div class="paragraph">
 <p>画像を読み込むには、画面左ペインのフォルダボタンをクリックします。</p>
 </div>
@@ -563,7 +591,7 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 </div>
 </div>
 <div class="sect3">
-<h4 id="true--8"><a class="anchor" href="#true--8"></a>2.3.3. 読み取り範囲指定、実行</h4>
+<h4 id="true--9"><a class="anchor" href="#true--9"></a>3.3.3. 読み取り範囲指定、実行</h4>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -597,7 +625,7 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 </div>
 </div>
 <div class="sect3">
-<h4 id="true--9"><a class="anchor" href="#true--9"></a>2.3.4. テキスト整形</h4>
+<h4 id="true--10"><a class="anchor" href="#true--10"></a>3.3.4. テキスト整形</h4>
 <div class="paragraph">
 <p>読み取りが完了すると、右のペインに認識結果が現れます。</p>
 </div>
@@ -614,7 +642,7 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 </div>
 </div>
 <div class="sect3">
-<h4 id="true--10"><a class="anchor" href="#true--10"></a>2.3.5. 後処理</h4>
+<h4 id="true--11"><a class="anchor" href="#true--11"></a>3.3.5. 後処理</h4>
 <div class="paragraph">
 <p>整形が終わったテキストファイルは、エミュレータ用のテープイメージ変換ツールなどに渡してご利用ください。</p>
 </div>
@@ -626,7 +654,7 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 </div>
 </div>
 <div class="sect1">
-<h2 id="true--11"><a class="anchor" href="#true--11"></a>3. 使用フォント</h2>
+<h2 id="true--12"><a class="anchor" href="#true--12"></a>4. 使用フォント</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>今回のOCRは、Googleより配布されている英語用の言語データをベースに以下のフォントを使ってファインチューニングを行っています。<br>
@@ -669,10 +697,10 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 </div>
 </div>
 <div class="sect1">
-<h2 id="true--12"><a class="anchor" href="#true--12"></a>4. 開発者情報</h2>
+<h2 id="true--13"><a class="anchor" href="#true--13"></a>5. 開発者情報</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="true--13"><a class="anchor" href="#true--13"></a>4.1. ライセンス</h3>
+<h3 id="true--14"><a class="anchor" href="#true--14"></a>5.1. ライセンス</h3>
 <div class="paragraph">
 <p>配布しているバイナリのライセンスは以下の通りとなります。</p>
 </div>
@@ -711,22 +739,195 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 </div>
 </div>
 <div class="sect2">
-<h3 id="true--14"><a class="anchor" href="#true--14"></a>4.2. ビルド方法</h3>
+<h3 id="true--15"><a class="anchor" href="#true--15"></a>5.2. ビルド方法</h3>
 <div class="paragraph">
-<p><mark>以下、執筆予定</mark></p>
+<p>MSYS2環境上でビルドします。<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="http://sourceforge.net/projects/msys2/">こちら</a>からMSYS2をダウンロードしてインストールしてください。<br>
+VC++はサポートしていません。<br>
+MSYS2はパッケージのバージョンアップが早く、またバージョンアップによるデグレードが非常に多いため、パッケージのアップデート(<code>pacman -Sy</code>)を行わず、バージョンを固定して使うことをおすすめします。作者がビルド、動作を確認しているのは以下のインストーラーで構築した環境です。(64ビット用)<br>
+<a href="https://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-x86_64-20170918.exe" class="bare">https://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-x86_64-20170918.exe</a></p>
+</li>
+<li>
+<p>MSYSをインストールしたフォルダのmingw32.exe(32ビット版をビルドする場合)またはmingw64.exe(64ビット版をビルドする場合)を実行。<br></p>
+</li>
+<li>
+<p>ダウンロードしたProgramListOCRのソースをMSYS上のホームフォルダに解凍。<br></p>
+</li>
+<li>
+<p><code>cd ProgramListOCR</code> を実行し、ソースフォルダにカレントを移動。<br></p>
+</li>
+<li>
+<p><code>setup/build.sh</code> を実行し、学習用フォントのダウンロードおよびTesseract,gImageReaderのビルドを行う。<br>
+ビルドには非常に時間がかかります。気長に気長にお待ちください。</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="true--15"><a class="anchor" href="#true--15"></a>4.3. 学習方法</h3>
-
+<h3 id="true--16"><a class="anchor" href="#true--16"></a>5.3. 学習方法</h3>
+<div class="paragraph">
+<p>Tesseract本体に含まれている学習用スクリプトを改変することで、P6ユーザー以外の人が独自に言語ファイルを作成したり、学習データにフォントを追加して認識精度を向上したりすることができます。<br>
+ただし、元のスクリプトがbash向けに作られているので、bashの知識があることが前提になります。</p>
+</div>
+<div class="paragraph">
+<p>本ソフトで提供している学習用スクリプトは以下の通りです。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>training/makeN6XTessdata.sh</code></dt>
+<dd>
+<p>N6X-Basic用学習スクリプト</p>
+</dd>
+<dt class="hdlist1"><code>training/makeHexTessdata.sh</code></dt>
+<dd>
+<p>16進ダンプリスト用学習スクリプト</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>上記のスクリプトをbash上で実行すると、<code>training/tessdata</code>フォルダに言語ファイルが生成されます。<br>
+学習に要する時間ですが、ダンプリストの方は1日程度で収束しますが、BASICの方はError rateが0.1を切るぐらいまで(私の環境で2週間程度)は回し続ける必要があります。<br>
+学習を終了するには適当なところでctrl+Cを押して強制的に止めてください。途中経過は保存されてますので、再度同じスクリプトを実行するとその時点から学習を再開します。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="true--17"><a class="anchor" href="#true--17"></a>5.4. 言語ファイル作成方法</h3>
+<div class="paragraph">
+<p>ここでは、独自に言語ファイルを作成し、PC-6001以外の機種、またはBASIC以外のプログラムに対応させる方法を簡単に記述します。<br>
+今回採用しているTesseract4.0はまだ開発版でドキュメントも十分にありません。本当に使いこなすためには本家Githubのwikiやソースコード、issuesなどを読み込んでキャッチアップするのが不可欠です。<br>
+<a href="https://github.com/tesseract-ocr/tesseract/wiki/TrainingTesseract-4.00" class="bare">https://github.com/tesseract-ocr/tesseract/wiki/TrainingTesseract-4.00</a></p>
+</div>
+<div class="paragraph">
+<p>学習に用いるスクリプトは<code>training</code>フォルダ、言語に関するデータは<code>training/langdata</code>に配置されています。<br>
+P6用BASIC言語ファイル(<code>n6x</code>)をベースに新たに言語ファイル(ここでは<code>xxx</code>)を作るには、</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>langdata/n6x</code>以下のファイルを<code>langdata/xxx</code>にコピーし、すべてのファイル名中の<code>n6x</code>を<code>xxx</code>にリネーム</p>
+</li>
+<li>
+<p><code>makeN6XTessData.sh</code>を<code>makeXXXTessData.sh</code>にコピー</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>ここで作成する言語設定ファイルは文字コードUTF-8,改行コードLF(UNIX)で保存する必要があります。<br>
+ここをWindowsの癖でSJIS,CRLFで保存すると原因不明のエラーに悩まされることになるので注意しましょう。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>training</code>以下のファイルについて、以下のように修正します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>training/makeXXXTessdata.sh</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>スクリプト中の<code>n6x</code>を<code>xxx</code>に置換</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>training/language-specific.sh</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>スクリプト中の<code>N6X_FONTS</code>のリストに学習させたいフォント名を追加<br>
+フォントは<code>fonts</code>フォルダ内にコピーすること。Windowsのシステムにインストールする必要はない。</p>
+</li>
+<li>
+<p>スクリプト中の<code>N6X</code>を<code>XXX</code>に置換</p>
+</li>
+<li>
+<p>スクリプト中の<code>n6x</code>を<code>xxx</code>に置換</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>langdata/xxx</code>以下のファイルについて、以下のように修正します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>desired_characters</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>その言語で使用可能な文字をすべて列挙する。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>xxx.training_text</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>学習に使用するテキストをコピー、ペーストする。</p>
+</li>
+<li>
+<p>このテキストと<code>language-specific.sh</code>に定義されたフォントを用いて学習用の画像が生成される。</p>
+</li>
+<li>
+<p>実際のプログラムリストを使用することが望ましい。</p>
+</li>
+<li>
+<p>実際のプログラムでは出現確率が低い文字は学習されない可能性があるため、冒頭にすべての文字を含んだ文字見本を入れておく。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>xxx.wordlist</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>その言語で使用される予約語を列挙する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>上記以外の設定ファイルは制御が難しいため、いじらない方がよいでしょう。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="true--18"><a class="anchor" href="#true--18"></a>5.5. インストーラー作成方法</h3>
+<div class="paragraph">
+<p>インストーラーを作成するには、上記のステップで学習を実行して言語ファイルを作成してあることが前提です。
+<code>installer/makeInstaller.sh</code>を実行すると、インストーラーの実行ファイル<code>installer/ProgramListOCRSetup.exe</code>が生成されます。<br></p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="true--16"><a class="anchor" href="#true--16"></a>5. 更新履歴</h2>
+<h2 id="true--19"><a class="anchor" href="#true--19"></a>6. 更新履歴</h2>
 <div class="sectionbody">
 <div class="ulist">
-<div class="title">1.0　2018/02/12</div>
+<div class="title">1.0　2018/02/14</div>
 <ul>
 <li>
 <p>初版<br></p>
@@ -738,7 +939,7 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-02-13 16:52:56
+Last updated 2018-02-14 15:57:39
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
