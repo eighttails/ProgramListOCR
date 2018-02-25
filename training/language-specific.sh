@@ -33,8 +33,8 @@ N6X_FONTS=( \
     "P6mk2mode5page1font" \
     "P6 Printer Routine" \
     "MSX-WIDTH40J" \
-    "DotMatrix" \
     )
+    #"DotMatrix" \
 
 HEX_FONTS=( \
     "VL Gothic" \
@@ -46,7 +46,6 @@ HEX_FONTS=( \
     "P6mk2mode5page1font" \
     "P6 Printer Routine" \
     "MSX-WIDTH40J" \
-    "DotMatrix" \
     )
 
 
@@ -85,7 +84,7 @@ set_lang_specific_parameters() {
   FRAGMENTS_DISABLED="y"
   RUN_SHAPE_CLUSTERING=0
   AMBIGS_FILTER_DENOMINATOR="100000"
-  LEADING="12"
+  LEADING="0"
   MEAN_COUNT="40"  # Default for latin script.
   # Language to mix with the language for maximum accuracy. Defaults to eng.
   # If no language is good, set to the base language.
