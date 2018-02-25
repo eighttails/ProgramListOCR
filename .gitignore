@@ -1,4 +1,4 @@
-training/tessdata
+training/tessdata_out
 training/tessdata_tmp
 installer/worktree
 installer/*.exe

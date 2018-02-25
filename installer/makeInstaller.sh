@@ -24,7 +24,7 @@ windeployqt --release $PRODUCTDATA/bin/gimagereader-qt5.exe
 ntldd -R $PRODUCTDATA/bin/gimagereader-qt5.exe | sed "s|\\\|/|g" | grep "$(cygpath -am $MINGW_PREFIX)/" | sed -e "s/^.*=> \(.*\) .*/\1/" | xargs -I{} cp {} $PRODUCTDATA/bin/
 
 #学習済み言語データをコピー
-cp -r $SCRIPT_DIR/../training/tessdata $PRODUCTDATA/share/
+cp -r $SCRIPT_DIR/../training/tessdata_out $PRODUCTDATA/share/tessdata
 
 #インストーラーをビルド
 cd $SCRIPT_DIR/worktree
