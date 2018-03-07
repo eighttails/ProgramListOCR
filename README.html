@@ -453,14 +453,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>by eighttails<br>
-<a href="http://eighttails.seesaa.net" class="bare">http://eighttails.seesaa.net</a></p>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="true-"><a class="anchor" href="#true-"></a>1. はじめに</h2>
 <div class="sectionbody">
@@ -662,10 +654,6 @@ GIMPのメニューから「フィルター」&#8594;「汎用」&#8594;「明�
 フォント自体の再配布を行うことはできないので、学習用スクリプト内でダウンロードして使用するようになっています。<br></p>
 </div>
 <div class="paragraph">
-<div class="title">DotMatrix</div>
-<p><a href="https://www.ffonts.net/DotMatrix-Regular.font" class="bare">https://www.ffonts.net/DotMatrix-Regular.font</a></p>
-</div>
-<div class="paragraph">
 <div class="title">P6TrueTypeフォント</div>
 <p>Hashi様作<br>
 <a href="http://p6ers.net/hashi/p6ttf.html" class="bare">http://p6ers.net/hashi/p6ttf.html</a></p>
@@ -790,7 +778,7 @@ MSYS2はパッケージのバージョンアップが早く、またバージョ
 </div>
 <div class="paragraph">
 <p>上記のスクリプトをbash上で実行すると、<code>training/tessdata</code>フォルダに言語ファイルが生成されます。<br>
-学習に要する時間ですが、ダンプリストの方は1日程度で収束しますが、BASICの方はError rateが0.1を切るぐらいまで(私の環境で2週間程度)は回し続ける必要があります。<br>
+学習に要する時間ですが、ダンプリストの方は1日程度で収束しますが、BASICの方はError rateが0.1を切るぐらいまで(私の環境で1週間程度)は回し続ける必要があります。<br>
 学習を終了するには適当なところでctrl+Cを押して強制的に止めてください。途中経過は保存されてますので、再度同じスクリプトを実行するとその時点から学習を再開します。</p>
 </div>
 </div>
@@ -927,7 +915,31 @@ P6用BASIC言語ファイル(<code>n6x</code>)をベースに新たに言語フ�
 <h2 id="true--19"><a class="anchor" href="#true--19"></a>6. 更新履歴</h2>
 <div class="sectionbody">
 <div class="ulist">
-<div class="title">1.0　2018/02/14</div>
+<div class="title">1.1.0　2018/03/7</div>
+<ul>
+<li>
+<p>Tesseract,gImageReaderを更新<br></p>
+</li>
+<li>
+<p>学習データ生成方法の見直し</p>
+<div class="ulist">
+<ul>
+<li>
+<p>にじんだ文字よりかすれた文字を優先して学習するよう画像を生成。</p>
+</li>
+<li>
+<p>実際のプログラムリストの印刷状態に近づくよう、行間を密着させた画像を生成。</p>
+</li>
+<li>
+<p>DotMatrixフォントを学習から除外(文字が薄くなりすぎて学習エラーになるため)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">1.0.0　2018/02/14</div>
 <ul>
 <li>
 <p>初版<br></p>
@@ -939,7 +951,7 @@ P6用BASIC言語ファイル(<code>n6x</code>)をベースに新たに言語フ�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-02-14 16:29:40
+Last updated 2018-03-07 22:36:01
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
