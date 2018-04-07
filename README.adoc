@@ -122,6 +122,10 @@ http://itouhiro.hatenablog.com/entry/20130602/font
 Gigamix様作 +
 http://www.gigamix.jp/download/gigamix/msxfont.php
 
+.美咲フォント
+門真なむ様作 +
+http://www.geocities.jp/littlimi/misaki.htm
+
 .P6プリンタルーチンフォント
 Mr.PCばんざーい!!様作 +
 電波新聞社刊「PC-6001・6601プログラム大全集」掲載プログラム内のフォントをeighttailsがTrueType化

@@ -45,4 +45,9 @@ wget -c http://www.gigamix.jp/download/gigamix/MSXW32J.TTF
 popd
 fi
 
+#Misaki fonts
+if [ ! -d $SCRIPT_DIR/misaki_ttf_2015-04-10.zip ]; then
+wget -c http://www.geocities.jp/littlimi/arc/misaki/misaki_ttf_2015-04-10.zip
+unzip misaki_ttf_2015-04-10.zip
+fi
 
