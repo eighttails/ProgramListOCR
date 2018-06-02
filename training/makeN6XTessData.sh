@@ -23,7 +23,7 @@ if [ ! -e $SCRIPT_DIR/tessdata_tmp/n6x/n6x.unicharset ]; then
 --noextract_font_properties \
 --exposures "-9 -7 -5 -3 -1 0 1 2" \
 --langdata_dir $SCRIPT_DIR/langdata \
---tessdata_dir $SCRIPT_DIR \
+--tessdata_dir $SCRIPT_DIR/tessdata \
 --output_dir $SCRIPT_DIR/tessdata_tmp 
   
 exitOnError
@@ -34,25 +34,27 @@ export SCROLLVIEW_PATH=$SCRIPT_DIR/../java
 export PATH=$(cygpath -u "$JAVA_HOME/bin"):$PATH
 export JAVA_TOOL_OPTIONS=-Duser.language=en
 
+MAX_ITERATIONS=10000
+
 while :
 do
 
 if [ ! -e $SCRIPT_DIR/tessdata_tmp/n6x_checkpoint ]; then
-combine_tessdata -e $SCRIPT_DIR/tessdata/eng.traineddata \
-$SCRIPT_DIR/tessdata/eng.lstm 
+combine_tessdata -e $SCRIPT_DIR/tessdata/jpn.traineddata \
+$SCRIPT_DIR/tessdata/jpn.lstm 
 exitOnError
 
 lstmtraining \
---old_traineddata $SCRIPT_DIR/tessdata/eng.traineddata \
---continue_from $SCRIPT_DIR/tessdata/eng.lstm \
+--old_traineddata $SCRIPT_DIR/tessdata/jpn.traineddata \
+--continue_from $SCRIPT_DIR/tessdata/jpn.lstm \
 --traineddata $SCRIPT_DIR/tessdata_tmp/n6x/n6x.traineddata \
 --debug_interval -1 \
---net_spec '[1,36,0,1 Ct3,3,16 Mp3,3 Lfys48 Lfx96 Lrx96 Lfx256 O1c111]' \
 --learning_rate 20e-4 \
 --model_output $SCRIPT_DIR/tessdata_tmp/n6x \
 --train_listfile $SCRIPT_DIR/tessdata_tmp/n6x.training_files.txt \
---max_iterations 10000
+--max_iterations=1000
 exitOnError
+
 
 else
 
@@ -64,14 +66,28 @@ lstmtraining \
 exitOnError
 
 
+START=$(date +%s)
+
 lstmtraining \
 --traineddata $SCRIPT_DIR/tessdata_tmp/n6x/n6x.traineddata \
 --debug_interval -1 \
 --continue_from $SCRIPT_DIR/tessdata_tmp/n6x_checkpoint \
 --model_output $SCRIPT_DIR/tessdata_tmp/n6x \
 --train_listfile $SCRIPT_DIR/tessdata_tmp/n6x.training_files.txt \
---max_iterations 10000
+--max_iterations=$MAX_ITERATIONS
 exitOnError
+
+END=$(date +%s)
+DIFF=$((END-START))
+
+#すでに所定イテレーションに達していた場合すぐ終了するので、
+#その場合はイテレーション数を増やしてやり直す
+if [ $DIFF -le 30 ]; then
+MAX_ITERATIONS=$(($MAX_ITERATIONS + 50000))
+else
+MAX_ITERATIONS=$(($MAX_ITERATIONS + 10000))
+fi
+
 fi
 
 done
