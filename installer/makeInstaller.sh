@@ -1,6 +1,18 @@
 #!/bin/bash 
 SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
 
+if [ $1 == "" ]; then
+    VERSION="dev"
+else
+    VERSION=$1
+fi
+
+if [ "$MINGW_CHOST" = "i686-w64-mingw32" ]; then
+    BIT='32bit'
+else
+    BIT='64bit'
+fi
+
 #Qt Installer Frameworkをインストール
 pacman -S --needed --noconfirm \
     $MINGW_PACKAGE_PREFIX-ntldd-git \
@@ -28,5 +40,5 @@ cp -r $SCRIPT_DIR/../training/tessdata_out $PRODUCTDATA/share/tessdata
 
 #インストーラーをビルド
 cd $SCRIPT_DIR/worktree
-binarycreator -v -f -c config/config.xml -p packages ../ProgramListOCRSetup.exe 
+binarycreator -v -f -c config/config.xml -p packages ../ProgramListOCRSetup-$BIT-$VERSION.exe 
 
