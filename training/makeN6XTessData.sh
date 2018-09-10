@@ -21,7 +21,7 @@ if [ ! -e $SCRIPT_DIR/tessdata_tmp/n6x/n6x.unicharset ]; then
 --lang n6x \
 --linedata_only \
 --noextract_font_properties \
---exposures "-9 -7 -5 -3 -1 0 1 2" \
+--exposures "-12 -10 -8 -6 -4 -2 0 2 4 6" \
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \
 --output_dir $SCRIPT_DIR/tessdata_tmp 
