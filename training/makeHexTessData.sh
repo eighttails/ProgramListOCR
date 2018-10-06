@@ -21,7 +21,7 @@ if [ ! -e $SCRIPT_DIR/tessdata_tmp/hex/hex.unicharset ]; then
 --lang hex \
 --linedata_only \
 --noextract_font_properties \
---exposures "-9 -7 -5 -3 -1 0 1 2" \
+--exposures "-12 -10 -8 -6 -4 -2 0 2 4 6" \
 --char_spacings "1.4 0.7 0.0" \
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \

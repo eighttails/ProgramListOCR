@@ -53,6 +53,7 @@ HEX_FONTS=( \
     "PiO Printer A" \
     "MSX-WIDTH40J" \
     )
+    #"DotMatrix" \
 
 
 
