@@ -109,6 +109,16 @@ parse_flags() {
                     j=$((j+1))
                 done
                 i=$((j-1)) ;;
+            --char_spacings)
+                spacing=""
+                while test $j -lt ${#ARGV[@]}; do
+                    test -z "${ARGV[$j]}" && break
+                    test $(echo ${ARGV[$j]} | cut -c -2) = "--" && break
+                    spacing="$spacing ${ARGV[$j]}"
+                    j=$((j+1))
+                done
+                parse_value "CHAR_SPACINGS" "$spacing"
+                i=$((j-1)) ;;
             --exposures)
                 exp=""
                 while test $j -lt ${#ARGV[@]}; do
@@ -206,7 +216,7 @@ generate_font_image() {
     local font="$1"
     tlog "Rendering using ${font}"
     local fontname=$(echo ${font} | tr ' ' '_' | sed 's/,//g')
-    local outbase=${TRAINING_DIR}/${LANG_CODE}.${fontname}.exp${EXPOSURE}
+    local outbase=${TRAINING_DIR}/${LANG_CODE}.${fontname}.spc${CHAR_SPACING}.exp${EXPOSURE}
 
     local common_args="--fontconfig_tmpdir=${FONT_CONFIG_CACHE}"
     common_args+=" --fonts_dir=${FONTS_DIR} --strip_unrenderable_words"
@@ -249,9 +259,9 @@ phase_I_generate_image() {
     if [[ -z ${TRAINING_TEXT} ]] || [[ ! -r ${TRAINING_TEXT} ]]; then
         err_exit "Could not find training text file ${TRAINING_TEXT}"
     fi
-    CHAR_SPACING="0.0"
 
     for EXPOSURE in $EXPOSURES; do
+    for CHAR_SPACING in $CHAR_SPACINGS; do
         if ((EXTRACT_FONT_PROPERTIES)) && [[ -r ${BIGRAM_FREQS_FILE} ]]; then
             # Parse .bigram_freqs file and compose a .train_ngrams file with text
             # for tesseract to recognize during training. Take only the ngrams whose
@@ -278,9 +288,10 @@ phase_I_generate_image() {
         # Check that each process was successful.
         for font in "${FONTS[@]}"; do
             local fontname=$(echo ${font} | tr ' ' '_' | sed 's/,//g')
-            local outbase=${TRAINING_DIR}/${LANG_CODE}.${fontname}.exp${EXPOSURE}
+            local outbase=${TRAINING_DIR}/${LANG_CODE}.${fontname}.spc${CHAR_SPACING}.exp${EXPOSURE}
             check_file_readable ${outbase}.box ${outbase}.tif
         done
+    done
     done
 }
 

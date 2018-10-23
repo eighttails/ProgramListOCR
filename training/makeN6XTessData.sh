@@ -21,7 +21,8 @@ if [ ! -e $SCRIPT_DIR/tessdata_tmp/n6x/n6x.unicharset ]; then
 --lang n6x \
 --linedata_only \
 --noextract_font_properties \
---exposures "-9 -7 -5 -3 -1 0 1 2" \
+--exposures "-12 -10 -8 -6 -4 -2 0 2 4 6" \
+--char_spacings "1.4 0.7 0.0" \
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \
 --output_dir $SCRIPT_DIR/tessdata_tmp 
@@ -49,7 +50,7 @@ lstmtraining \
 --continue_from $SCRIPT_DIR/tessdata/jpn.lstm \
 --traineddata $SCRIPT_DIR/tessdata_tmp/n6x/n6x.traineddata \
 --debug_interval -1 \
---learning_rate 20e-4 \
+--perfect_sample_delay 10 \
 --model_output $SCRIPT_DIR/tessdata_tmp/n6x \
 --train_listfile $SCRIPT_DIR/tessdata_tmp/n6x.training_files.txt \
 --max_iterations=1000
@@ -71,6 +72,7 @@ START=$(date +%s)
 lstmtraining \
 --traineddata $SCRIPT_DIR/tessdata_tmp/n6x/n6x.traineddata \
 --debug_interval -1 \
+--perfect_sample_delay 10 \
 --continue_from $SCRIPT_DIR/tessdata_tmp/n6x_checkpoint \
 --model_output $SCRIPT_DIR/tessdata_tmp/n6x \
 --train_listfile $SCRIPT_DIR/tessdata_tmp/n6x.training_files.txt \
