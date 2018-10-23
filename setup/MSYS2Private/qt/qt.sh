@@ -179,7 +179,7 @@ fi
 
 #Qt Creator
 cd ~/extlib
-QTC_MAJOR_VER=4.5
+QTC_MAJOR_VER=4.6
 QTC_MINOR_VER=.1
 QTC_VER=$QTC_MAJOR_VER$QTC_MINOR_VER
 QTC_SOURCE_DIR=qt-creator-opensource-src-$QTC_VER
