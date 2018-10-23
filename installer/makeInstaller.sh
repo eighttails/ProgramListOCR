@@ -1,7 +1,7 @@
 #!/bin/bash 
 SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
 
-if [ $1 == "" ]; then
+if [ "$1" == "" ]; then
     VERSION="dev"
 else
     VERSION=$1
@@ -15,13 +15,14 @@ fi
 
 #Qt Installer Frameworkをインストール
 pacman -S --needed --noconfirm \
-    $MINGW_PACKAGE_PREFIX-ntldd-git \
+    $MINGW_PACKAGE_PREFIX-ntldd \
     $MINGW_PACKAGE_PREFIX-qt-installer-framework-git
 
 rm -rf $SCRIPT_DIR/worktree 2> /dev/null
 cp -r $SCRIPT_DIR/skeleton $SCRIPT_DIR/worktree
 PRODUCTDATA=$SCRIPT_DIR/worktree/packages/org.eithttails.programlistocr/data
 mkdir -p $PRODUCTDATA/bin
+mkdir -p $PRODUCTDATA/share
 
 #READMEをコピー
 cp $SCRIPT_DIR/../README.html $PRODUCTDATA
