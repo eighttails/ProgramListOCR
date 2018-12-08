@@ -8,7 +8,7 @@ else
 fi
 }
 
-SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
+SCRIPT_DIR=$(dirname $(readlink -f ${BASH_SOURCE:-$0}))
 
 mkdir -p $SCRIPT_DIR/tessdata_out
 mkdir -p $SCRIPT_DIR/tessdata_tmp/n6x

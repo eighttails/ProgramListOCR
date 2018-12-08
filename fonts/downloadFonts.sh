@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
+SCRIPT_DIR=$(dirname $(readlink -f ${BASH_SOURCE:-$0}))
 
 cd $SCRIPT_DIR
 
