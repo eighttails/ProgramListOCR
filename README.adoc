@@ -102,6 +102,12 @@ PC-6001用BASICの場合は、拙作の http://eighttails.seesaa.net/article/305
 ビットマップフォント、ドットマトリクス印字によるフォントに対応するためプログラムリストによく使われるフォントを追加していますが、Googleの学習済みモデルをベースにしているので、たいていの書体は読めると思います。 +
 フォント自体の再配布を行うことはできないので、学習用スクリプト内でダウンロードして使用するようになっています。 +
 
+.DotMatrix
+https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
+
+.GP4 LCD Font
+https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
+
 .P6TrueTypeフォント
 Hashi様作 +
 http://p6ers.net/hashi/p6ttf.html
@@ -223,8 +229,11 @@ P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(�
 
 
 == 更新履歴
+.1.3.0　2019/1/1
+* 学習するフォントを追加
+
 .1.2.0　2018/11/10
-* Tesseract4.0.0,gImageReader3.0.0の正式版に更新 +
+* Tesseract4.0.0,gImageReader3.3.0の正式版に更新 +
 * 学習データ生成方法の見直し
 ** 文字間隔が多少開いていても読めるように学習。
 
