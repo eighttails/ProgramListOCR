@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <Installer>   
     <Name>Program List OCR</Name>   
-    <Version>1.2.0</Version>  
+    <Version>1.3.0</Version>  
     <Title>Program List OCR</Title>   
     <Publisher>eighttails</Publisher>   
     <StartMenuDir>Program List OCR</StartMenuDir>   
