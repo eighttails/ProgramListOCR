@@ -57,7 +57,12 @@ source "$(dirname $0)/language-specific.sh"
 set_lang_specific_parameters ${LANG_CODE}
 
 initialize_fontconfig
+if [ "$MINGW_CHOST" != "" ]; then
 export THREADS=$NUMBER_OF_PROCESSORS
+else
+export THREADS=$(nproc)
+fi
+
 
 phase_I_generate_image $THREADS
 phase_UP_generate_unicharset

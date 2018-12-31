@@ -24,6 +24,7 @@ VALID_LANGUAGE_CODES="n6x hex"
 UNUSABLE_LANGUAGE_CODES=""
 
 N6X_FONTS=( \
+    "DotMatrix" \
     "MisakiGothic" \
     "MisakiMincho" \
     "VL Gothic" \
@@ -36,10 +37,11 @@ N6X_FONTS=( \
     "P6 Printer Routine" \
     "PiO Printer A" \
     "MSX-WIDTH40J" \
+    "lcdfont" \
     )
-    #"DotMatrix" \
 
 HEX_FONTS=( \
+    "DotMatrix" \
     "MisakiGothic" \
     "MisakiMincho" \
     "VL Gothic" \
@@ -52,8 +54,8 @@ HEX_FONTS=( \
     "P6 Printer Routine" \
     "PiO Printer A" \
     "MSX-WIDTH40J" \
+    "lcdfont" \
     )
-    #"DotMatrix" \
 
 
 

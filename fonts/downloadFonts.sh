@@ -1,12 +1,30 @@
 #!/bin/bash
-SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
+if [ "$MINGW_CHOST" != "" ]; then
+    SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
+else
+    SCRIPT_DIR=$(dirname $(readlink -f ${BASH_SOURCE:-$0}))
+fi
 
 cd $SCRIPT_DIR
 
 #DotMatrix
-if [ ! -d $SCRIPT_DIR/DotMatrix-Regular ]; then
-wget -c http://www.ffonts.net/DotMatrix-Regular.font.zip
-unzip -d DotMatrix-Regular DotMatrix-Regular.font.zip
+# if [ ! -d $SCRIPT_DIR/DotMatrix-Regular ]; then
+# wget -c http://www.ffonts.net/DotMatrix-Regular.font.zip
+# unzip -d DotMatrix-Regular DotMatrix-Regular.font.zip
+# fi
+
+#DotMatrix-maisfontes
+if [ ! -e $SCRIPT_DIR/dotmatrix-1-2.ttf ]; then
+wget --content-disposition --no-check-certificate https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
+unzip dotmatrix-1-2-maisfontes.zip
+fi
+
+#GP4 LCD Font
+if [ ! -d $SCRIPT_DIR/GP4_LCD ]; then
+mkdir $SCRIPT_DIR/GP4_LCD
+pushd GP4_LCD
+wget --content-disposition http://www.fontsner.com/download/11753-6210d289d4d92b7ef45086e1bb8d7b14.ttf
+popd
 fi
 
 #P6 TTF Font
@@ -46,7 +64,7 @@ popd
 fi
 
 #Misaki fonts
-if [ ! -d $SCRIPT_DIR/misaki_ttf_2015-04-10.zip ]; then
+if [ ! -e $SCRIPT_DIR/misaki_ttf_2015-04-10.zip ]; then
 wget -c http://www.geocities.jp/littlimi/arc/misaki/misaki_ttf_2015-04-10.zip
 unzip misaki_ttf_2015-04-10.zip
 fi

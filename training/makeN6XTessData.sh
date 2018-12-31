@@ -8,7 +8,11 @@ else
 fi
 }
 
-SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
+if [ "$MINGW_CHOST" != "" ]; then
+    SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
+else
+    SCRIPT_DIR=$(dirname $(readlink -f ${BASH_SOURCE:-$0}))
+fi
 
 mkdir -p $SCRIPT_DIR/tessdata_out
 mkdir -p $SCRIPT_DIR/tessdata_tmp/n6x
@@ -32,7 +36,11 @@ exitOnError
 fi
 
 export SCROLLVIEW_PATH=$SCRIPT_DIR/../java
+if [ "$MINGW_CHOST" != "" ]; then
 export PATH=$(cygpath -u "$JAVA_HOME/bin"):$PATH
+else
+export PATH=$JAVA_HOME/bin:$PATH
+fi
 export JAVA_TOOL_OPTIONS=-Duser.language=en
 
 MAX_ITERATIONS=10000
