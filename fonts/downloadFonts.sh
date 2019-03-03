@@ -14,9 +14,9 @@ cd $SCRIPT_DIR
 # fi
 
 #DotMatrix-maisfontes
-if [ ! -e $SCRIPT_DIR/dotmatrix-1-2.ttf ]; then
+if [ ! -e $SCRIPT_DIR/dotmatrix-1-2-maisfontes.zip ]; then
 wget --content-disposition --no-check-certificate https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
-unzip dotmatrix-1-2-maisfontes.zip
+unzip dotmatrix-1-2-maisfontes.zip -d DotMatrix
 fi
 
 #GP4 LCD Font
@@ -64,13 +64,13 @@ popd
 fi
 
 #Misaki fonts
-if [ ! -e $SCRIPT_DIR/misaki_ttf_2015-04-10.zip ]; then
-wget -c http://www.geocities.jp/littlimi/arc/misaki/misaki_ttf_2015-04-10.zip
-unzip misaki_ttf_2015-04-10.zip
+if [ ! -e $SCRIPT_DIR/misaki_ttf_2019-02-03a.zip ]; then
+wget -c http://littlelimit.net/arc/misaki/misaki_ttf_2019-02-03a.zip
+unzip misaki_ttf_2019-02-03a.zip -d Misaki
 fi
 
 #N-Font
 if [ ! -e $SCRIPT_DIR/N-Font.zip ]; then
 wget -c http://upd780c1.g1.xrea.com/pc-8001/bin/N-Font.zip
-unzip N-Font.zip
+unzip N-Font.zip -d N-Font
 fi
