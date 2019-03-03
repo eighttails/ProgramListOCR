@@ -131,6 +131,11 @@ http://www.gigamix.jp/download/gigamix/msxfont.php
 門真なむ様作 +
 http://www.geocities.jp/littlimi/misaki.htm
 
+.N-Font
+モ～リン様作 +
+http://upd780c1.g1.xrea.com/pc-8001/index.html#TTF
+
+
 .P6プリンタルーチンフォント
 Mr.PCばんざーい!!様作 +
 電波新聞社刊「PC-6001・6601プログラム大全集」掲載プログラム内のフォントをeighttailsがTrueType化

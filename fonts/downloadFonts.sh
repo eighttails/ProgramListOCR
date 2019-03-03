@@ -69,3 +69,8 @@ wget -c http://www.geocities.jp/littlimi/arc/misaki/misaki_ttf_2015-04-10.zip
 unzip misaki_ttf_2015-04-10.zip
 fi
 
+#N-Font
+if [ ! -e $SCRIPT_DIR/N-Font.zip ]; then
+wget -c http://upd780c1.g1.xrea.com/pc-8001/bin/N-Font.zip
+unzip N-Font.zip
+fi

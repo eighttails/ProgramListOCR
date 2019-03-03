@@ -38,6 +38,7 @@ N6X_FONTS=( \
     "PiO Printer A" \
     "MSX-WIDTH40J" \
     "lcdfont" \
+    "N-Font_Original" \
     )
 
 HEX_FONTS=( \
@@ -55,6 +56,7 @@ HEX_FONTS=( \
     "PiO Printer A" \
     "MSX-WIDTH40J" \
     "lcdfont" \
+    "N-Font_Original" \
     )
 
 

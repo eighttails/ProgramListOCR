@@ -20,13 +20,14 @@ mkdir -p $SCRIPT_DIR/tessdata_tmp/n6x
 export PANGOCAIRO_BACKEND=fc 
 
 if [ ! -e $SCRIPT_DIR/tessdata_tmp/n6x/n6x.unicharset ]; then
+export TEXT2IMAGE_EXTRA_ARGS=""
 ./tesstrain.sh \
 --fonts_dir $SCRIPT_DIR/../fonts \
 --lang n6x \
 --linedata_only \
 --noextract_font_properties \
---exposures "-12 -10 -8 -6 -4 -2 0 2 4 6" \
---char_spacings "1.4 0.7 0.0" \
+--exposures "0 2 4 6 -2 -4 -6 -8 -10 -12" \
+--char_spacings "0.0 0.7 1.4" \
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \
 --output_dir $SCRIPT_DIR/tessdata_tmp 
