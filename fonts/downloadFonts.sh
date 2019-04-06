@@ -36,6 +36,18 @@ lha x ../p6ttf.lzh
 popd
 fi
 
+#Noto Sans
+if [ ! -e $SCRIPT_DIR/NotoSansCJKjp-hinted.zip ]; then
+wget -c https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip
+unzip NotoSansCJKjp-hinted.zip -d NotoSans
+fi
+
+#Noto Serif
+if [ ! -e $SCRIPT_DIR/NotoSerifCJKjp-hinted.zip ]; then
+wget -c https://noto-website-2.storage.googleapis.com/pkgs/NotoSerifCJKjp-hinted.zip
+unzip NotoSerifCJKjp-hinted.zip -d NotoSerif
+fi
+
 #VLGothic
 if [ ! -d $SCRIPT_DIR/VLGothic ]; then
 wget -c https://ja.osdn.net/dl/vlgothic/VLGothic-20141206.zip
