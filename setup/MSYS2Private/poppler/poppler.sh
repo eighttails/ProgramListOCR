@@ -6,9 +6,9 @@ if [ $((NO_DEPENDENCY)) == 0 ]; then
 $SCRIPT_DIR/../qt/qt.sh
 exitOnError
 fi
-	
+    
 #必要ライブラリ
-pacman -S --needed --noconfirm \
+pacman "${PACMAN_INSTALL_OPTS[@]}" \
 $MINGW_PACKAGE_PREFIX-cairo \
 $MINGW_PACKAGE_PREFIX-curl \
 $MINGW_PACKAGE_PREFIX-freetype \
@@ -20,6 +20,8 @@ $MINGW_PACKAGE_PREFIX-nss \
 $MINGW_PACKAGE_PREFIX-openjpeg2 \
 $MINGW_PACKAGE_PREFIX-poppler-data \
 $MINGW_PACKAGE_PREFIX-zlib
+
+exitOnError
 }
 
 function build(){
@@ -28,7 +30,7 @@ echo "poppler is already installed."
 exit 0
 fi
 
-POPPLER_VERSION=0.67.0
+POPPLER_VERSION=0.76.0
 POPPLER_TAG=$POPPLER_VERSION
 POPPLER_ARCHIVE=poppler-$POPPLER_TAG.tar.xz
 POPPLER_SRC_DIR=poppler-$POPPLER_VERSION

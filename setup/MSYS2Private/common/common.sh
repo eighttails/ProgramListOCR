@@ -66,7 +66,7 @@ function toolchain(){
 mkdir $MINGW_PREFIX 2> /dev/null
 
 #ツール類
-pacman -S --needed --noconfirm \
+pacman "${PACMAN_INSTALL_OPTS[@]}" \
 base-devel \
 VCS \
 unzip \
@@ -103,6 +103,14 @@ if [ -z "$MINGW_PREFIX" ]; then
   exit 1
 fi
 
+#pacmanのパッケージ取得オプション
+PACMAN_INSTALL_OPTS=()
+PACMAN_INSTALL_OPTS+=('-S')
+PACMAN_INSTALL_OPTS+=('--needed')
+PACMAN_INSTALL_OPTS+=('--noconfirm')
+PACMAN_INSTALL_OPTS+=('--disable-download-timeout')
+export PACMAN_INSTALL_OPTS
+
 #基本ツールチェーンのセットアップ
 toolchain
 
@@ -124,13 +132,13 @@ export CMAKE_INCLUDE_PATH=$PREFIX/include
 #最低限必要なDLLをコピー
 pushd $MINGW_PREFIX/bin
 if [ "$MINGW_CHOST" = "i686-w64-mingw32" ]; then
-	#32bit
+    #32bit
         export BIT='32bit'
-	NEEDED_DLLS='libgcc_s_dw2-1.dll libstdc++-6.dll libwinpthread-1.dll zlib1.dll'
+    NEEDED_DLLS='libgcc_s_dw2-1.dll libstdc++-6.dll libwinpthread-1.dll zlib1.dll'
 else
-	#64bit
+    #64bit
         export BIT='64bit'
-	NEEDED_DLLS='libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll zlib1.dll'
+    NEEDED_DLLS='libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll zlib1.dll'
 fi
 cp -f $NEEDED_DLLS $PREFIX/bin
 popd
