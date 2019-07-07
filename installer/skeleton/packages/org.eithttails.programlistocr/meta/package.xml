@@ -2,8 +2,8 @@
 <Package>   
     <DisplayName>基本コンポーネント</DisplayName>   
     <Description>gImageReaderとOCR言語ファイル(N6X-Basic,マシン語)のセットです。</Description>   
-    <Version>1.3.0</Version>   
-    <ReleaseDate>2018-12-31</ReleaseDate>   
+    <Version>1.4.0</Version>   
+    <ReleaseDate>2019-07-08</ReleaseDate>   
     <Default>script</Default>   
     <Licenses>     
         <License name="gImageReader" file="GPLv3.txt" />   
