@@ -13,10 +13,18 @@ else
     BIT='64bit'
 fi
 
+#pacmanのパッケージ取得オプション
+PACMAN_INSTALL_OPTS=()
+PACMAN_INSTALL_OPTS+=('-S')
+PACMAN_INSTALL_OPTS+=('--needed')
+PACMAN_INSTALL_OPTS+=('--noconfirm')
+PACMAN_INSTALL_OPTS+=('--disable-download-timeout')
+export PACMAN_INSTALL_OPTS
+
 #Qt Installer Frameworkをインストール
-pacman -S --needed --noconfirm \
+pacman "${PACMAN_INSTALL_OPTS[@]}" \
     $MINGW_PACKAGE_PREFIX-ntldd \
-    $MINGW_PACKAGE_PREFIX-qt-installer-framework-git
+    $MINGW_PACKAGE_PREFIX-qt-installer-framework
 
 rm -rf $SCRIPT_DIR/worktree 2> /dev/null
 cp -r $SCRIPT_DIR/skeleton $SCRIPT_DIR/worktree
