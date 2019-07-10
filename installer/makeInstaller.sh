@@ -9,8 +9,21 @@ fi
 
 if [ "$MINGW_CHOST" = "i686-w64-mingw32" ]; then
     BIT='32bit'
+    ARCH='i686'
 else
     BIT='64bit'
+    ARCH='x86_64'
+fi
+
+#Qt Installer Frameworkをインストール
+#MSYS2の最新版でビルドしたインストーラーは動作しないので旧バージョンをインストールする。
+#https://bugreports.qt.io/browse/QTIFW-1312
+if [ "$(command -v binarycreator | wc -l)" == "0" ];then
+    pushd /tmp
+    QTIFW_PACKAGE=mingw-w64-$ARCH-qt-installer-framework-git-r2975.36059724-1-any.pkg.tar.xz
+    wget -c https://sourceforge.net/projects/msys2/files/REPOS/MINGW/$ARCH/$QTIFW_PACKAGE
+    pacman -U --needed --noconfirm $QTIFW_PACKAGE
+    popd
 fi
 
 #pacmanのパッケージ取得オプション
@@ -20,11 +33,9 @@ PACMAN_INSTALL_OPTS+=('--needed')
 PACMAN_INSTALL_OPTS+=('--noconfirm')
 PACMAN_INSTALL_OPTS+=('--disable-download-timeout')
 export PACMAN_INSTALL_OPTS
-
-#Qt Installer Frameworkをインストール
+#依存ライブラリをインストール
 pacman "${PACMAN_INSTALL_OPTS[@]}" \
-    $MINGW_PACKAGE_PREFIX-ntldd \
-    $MINGW_PACKAGE_PREFIX-qt-installer-framework
+    $MINGW_PACKAGE_PREFIX-ntldd 
 
 rm -rf $SCRIPT_DIR/worktree 2> /dev/null
 cp -r $SCRIPT_DIR/skeleton $SCRIPT_DIR/worktree
