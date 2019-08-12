@@ -181,7 +181,7 @@ N6X-Basic用学習スクリプト
 `training/makeHexTessdata.sh`::
 16進ダンプリスト用学習スクリプト
 
-上記のスクリプトをbash上で実行すると、`training/tessdata`フォルダに言語ファイルが生成されます。 +
+上記のスクリプトをbash上で実行すると、 `training/tessdata` フォルダに言語ファイルが生成されます。 +
 学習に要する時間ですが、ダンプリストの方は1日程度で収束しますが、BASICの方はError rateが0.1を切るぐらいまで(私の環境で1週間程度)は回し続ける必要があります。 +
 学習を終了するには適当なところでctrl+Cを押して強制的に止めてください。途中経過は保存されてますので、再度同じスクリプトを実行するとその時点から学習を再開します。
 
@@ -190,11 +190,11 @@ N6X-Basic用学習スクリプト
 今回採用しているTesseract4.0はドキュメントも十分にありません。本当に使いこなすためには本家Githubのwikiやソースコード、issuesなどを読み込んでキャッチアップするのが不可欠です。 +
 https://github.com/tesseract-ocr/tesseract/wiki/TrainingTesseract-4.00
 
-学習に用いるスクリプトは`training`フォルダ、言語に関するデータは`training/langdata`に配置されています。 +
+学習に用いるスクリプトは `training` フォルダ、言語に関するデータは `training/langdata` に配置されています。 +
 P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(ここでは`xxx`)を作るには、
 
-* `langdata/n6x`以下のファイルを`langdata/xxx`にコピーし、すべてのファイル名中の`n6x`を`xxx`にリネーム
-* `makeN6XTessData.sh`を`makeXXXTessData.sh`にコピー
+* `langdata/n6x` 以下のファイルを `langdata/xxx` にコピーし、すべてのファイル名中の `n6x` を `xxx` にリネーム
+* `makeN6XTessData.sh` を `makeXXXTessData.sh` にコピー
 
 
 [WARNING]
@@ -206,22 +206,22 @@ P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(�
 `training`以下のファイルについて、以下のように修正します。
 
 * `training/makeXXXTessdata.sh`
-** スクリプト中の`n6x`を`xxx`に置換
+** スクリプト中の `n6x` を `xxx` に置換
 
 * `training/language-specific.sh`
-** スクリプト中の`N6X_FONTS`のリストに学習させたいフォント名を追加 +
+** スクリプト中の `N6X_FONTS` のリストに学習させたいフォント名を追加 +
 フォントは`fonts`フォルダ内にコピーすること。Windowsのシステムにインストールする必要はない。
-** スクリプト中の`N6X`を`XXX`に置換
-** スクリプト中の`n6x`を`xxx`に置換
+** スクリプト中の `N6X` を `XXX` に置換
+** スクリプト中の `n6x` を `xxx` に置換
 
-`langdata/xxx`以下のファイルについて、以下のように修正します。
+`langdata/xxx` 以下のファイルについて、以下のように修正します。
 
 * `desired_characters`
 ** その言語で使用可能な文字をすべて列挙する。
 
 * `xxx.training_text`
 ** 学習に使用するテキストをコピー、ペーストする。
-** このテキストと`language-specific.sh`に定義されたフォントを用いて学習用の画像が生成される。
+** このテキストと `language-specific.sh` に定義されたフォントを用いて学習用の画像が生成される。
 ** 実際のプログラムリストを使用することが望ましい。
 ** 実際のプログラムでは出現確率が低い文字は学習されない可能性があるため、冒頭にすべての文字を含んだ文字見本を入れておく。
 
@@ -232,7 +232,7 @@ P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(�
 
 === インストーラー作成方法
 インストーラーを作成するには、上記のステップで学習を実行して言語ファイルを作成してあることが前提です。
-`installer/makeInstaller.sh`を実行すると、インストーラーの実行ファイル`installer/ProgramListOCRSetup.exe`が生成されます。 +
+`installer/makeInstaller.sh` を実行すると、インストーラーの実行ファイル `installer/ProgramListOCRSetup.exe` が生成されます。 +
 
 
 == 更新履歴
