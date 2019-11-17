@@ -21,7 +21,7 @@ fi
 if [ "$(command -v binarycreator | wc -l)" == "0" ];then
     pushd /tmp
     QTIFW_PACKAGE=mingw-w64-$ARCH-qt-installer-framework-git-r2975.36059724-1-any.pkg.tar.xz
-    wget -c https://sourceforge.net/projects/msys2/files/REPOS/MINGW/$ARCH/$QTIFW_PACKAGE
+    wget -c http://repo.msys2.org/mingw/$ARCH/$QTIFW_PACKAGE
     pacman -U --needed --noconfirm $QTIFW_PACKAGE
     popd
 fi
