@@ -35,7 +35,12 @@ PACMAN_INSTALL_OPTS+=('--disable-download-timeout')
 export PACMAN_INSTALL_OPTS
 #依存ライブラリをインストール
 pacman "${PACMAN_INSTALL_OPTS[@]}" \
-    $MINGW_PACKAGE_PREFIX-ntldd 
+    $MINGW_PACKAGE_PREFIX-ntldd \
+    $MINGW_PACKAGE_PREFIX-asciidoctor
+if [ $? -ne 0 ]; then
+    echo "ERROR."
+    exit 1
+fi
 
 rm -rf $SCRIPT_DIR/worktree 2> /dev/null
 cp -r $SCRIPT_DIR/skeleton $SCRIPT_DIR/worktree
@@ -43,8 +48,10 @@ PRODUCTDATA=$SCRIPT_DIR/worktree/packages/org.eithttails.programlistocr/data
 mkdir -p $PRODUCTDATA/bin
 mkdir -p $PRODUCTDATA/share
 
-#READMEをコピー
-cp $SCRIPT_DIR/../README.html $PRODUCTDATA
+#READMEを生成
+pushd $PRODUCTDATA
+asciidoctor $SCRIPT_DIR/../README.adoc -D .
+popd
 
 #インストーラー作成作業ディレクトリにgImageReaderをビルド
 GIMAGEREADER_PREFIX=$PRODUCTDATA $SCRIPT_DIR/../setup/MSYS2Private/gimagereader/gimagereader.sh
