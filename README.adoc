@@ -26,6 +26,7 @@ Program List OCR is a compilation of following open souce softwares. +
 * 16進ダンプリスト
 ////
 And it also contains special OCR language model files. 
+
 * BASIC(Generic Basic Langauge)
 * N6X-BASIC(BASIC for NEC PC-6001(Japanese))
 * Hexadecimal machine language
