@@ -155,24 +155,31 @@ image::images/RECOGNIZE.PNG[]
 ////
 It takes very long time to recognize.
 
-==== テキスト整形
+==== Reformat text
+////
 読み取りが完了すると、右のペインに認識結果が現れます。
 
 image::images/Image-130218-043350.929.png[]
 このテキストをお好みのテキストエディタにコピー、ペーストしてください。
+////
+When recognition is finished, recognized text appears on the right pane. 
 
+image::images/Image-130218-043350.929.png[]
+Copy and paste the text to your favorite text editor.
+
+////
 この状態のテキストは行のつながりを認識できていません。印刷の都合で2行に折り返されてしまった行は分割して出力されているので、目視で連結してやる必要があります。 +
+////
+At this point line-wrapping is not recognized. +
+You have to concatenate wrapped lines manually.
 
+==== Finish
+Reformatted text can be used for your emulator's input, e.g.casette tape image file. +
+Enjoy!
 
-==== 後処理
-整形が終わったテキストファイルは、エミュレータ用のテープイメージ変換ツールなどに渡してご利用ください。
-
-PC-6001用BASICの場合は、拙作の http://eighttails.seesaa.net/article/305067428.html[N6XBasicChecker] を使えばシンタックスエラーレベルの認識ミスはイメージ変換、実行前に発見することができます。
-
-
-== 開発者情報
-=== ライセンス
-配布しているバイナリのライセンスは以下の通りとなります。
+== Developer information
+=== License
+Licence of bundled softwares are as follows.
 
 Tesseract:: 
 * Apache License 2.0
@@ -181,5 +188,7 @@ gImageReader::
 * GNU General Public License v3.0
 * https://github.com/manisandro/gImageReader
 
+////
 本リポジトリに含まれるスクリプトはTesseractに含まれているものを改変したものですので、Apache License 2.0とします。
-
+////
+Scripts in this repository is modified version of Tesseract and licensed under Apache License 2.0, same as Tesseract.
