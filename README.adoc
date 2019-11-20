@@ -130,7 +130,7 @@ Select image(s) to recognize in file select dialog.
 読み取りを実行する前にページを移動すると選択範囲がクリアされてしまいます。
 ////
 Do the following steps #page by page#. +
-If you move page before recognization the seleced regions will be cleared. 
+If you move page before recognition, the selected regions will be cleared. 
 ====
 ////
 プログラムリストとして読み取る範囲をドラッグして指定します。 +
@@ -192,4 +192,4 @@ gImageReader::
 ////
 本リポジトリに含まれるスクリプトはTesseractに含まれているものを改変したものですので、Apache License 2.0とします。
 ////
-Scripts in this repository is modified version of Tesseract and licensed under Apache License 2.0, same as Tesseract.
+Scripts in this repository are modified version of Tesseract and licensed under Apache License 2.0, same as Tesseract.
