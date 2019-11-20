@@ -12,27 +12,31 @@ eighttails <http://eighttails.seesaa.net>
 * Tesseract(OCRエンジン)
 * gImageReader(GUIフロントエンド)
 ////
-Program List OCR is a OCR(Optical Character Recognition) software which is specific to computer program listings published in 1980's. +
-It converts scanned program listing images to text file. You can convert text to emulator's input file, e.g. casette tape image +  
-Program List OCR is a compilation of following open souce softwares. +
+_Program List OCR_ is a peice of OCR (Optical Character Recognition) software which is specific to computer program listings published in 1980s. +
 
-* Tesseract(OCR engine)
-* gImageReader(GUI frontend)
+It converts scanned program listing images into plain text. You can convert this text into an emulator's input file, e.g. casette tape image +  
+
+_Program List OCR_ is a compilation of following open souce softwares. +
+
+* Tesseract (OCR engine)
+* gImageReader (GUI frontend)
 
 ////
 上記に加えて、独自にOCRに学習させて作成した以下の言語ファイルを含んでいます。
 
-* BASIC(PC-6001シリーズ用N6X-Basic)
+* BASIC (PC-6001シリーズ用N6X-Basic)
 * 16進ダンプリスト
 ////
 And it also contains special OCR language model files. 
 
-* BASIC(Generic Basic Langauge)
-* N6X-BASIC(BASIC for NEC PC-6001(Japanese))
+* BASIC (Generic Basic Langauge)
+* N6X-BASIC (BASIC for NEC PC-6001 (Japanese))
 * Hexadecimal machine language
 
-BASIC(bas) model is for generic BASIC language listings. It recognizes ASCII printable characters. +
-N6X-BASIC(n6x) model is dedicated to NEC PC-6001. It recognizes ASCII and PC-6001's Japanese and graphical characters. +
+BASIC (bas) model is for generic BASIC language listings. It recognizes ASCII printable characters. +
+
+N6X-BASIC (n6x) model is dedicated to NEC PC-6001. It recognizes ASCII and PC-6001's Japanese and graphical characters. +
+
 Hexadecimal machine language(hex) model recognizes only hexadecimal numbers and some extra characters(0-9,A-F,Sum). Therefore it achives better accuracy. +
 
 
@@ -50,17 +54,17 @@ ProgramListOCRSetup.exeをダブルクリックしてインストールします
 インストーラーの指示に従って操作すれば完了です。
 ////
 . Double click ProgramListOCRSetup....exe
-. Follow instruction of the installer.
+. Follow the instructions of the installer.
 
 === Start
 ////
 スタートメニューから「Program List OCR」->「gImageReader」を選択するとOCRのGUIが起動します。
 ////
-Launch "Program List OCR" -> "gImageReader" in start menu.
+Launch "Program List OCR" -> "gImageReader" from the Start Menu.
 
 image::images/Image-120218-055039.703.png[]
 
-=== Operation instruction
+=== Operating instructions
 ==== Scan images and preprocessing
 ////
 読み込む対象のプログラムが掲載された紙面をスキャンします。 +
@@ -76,10 +80,10 @@ http://eighttails.seesaa.net/article/283953696.html
 
 です。 +
 ////
-Scan program listings with your document scanner.(Taking picture with camera is not recommended) +
+Scan program listings with your document scanner. (Taking picture with camera is not recommended) +
 Preferred image format is:
 
-* 600DPI
+* 600dpi
 * grayscale
 * TIFF or high quality JPEG
 
@@ -105,7 +109,7 @@ image::images/BEFORE.PNG[]
 .After "Erode"
 image::images/AFTER.PNG[]
 
-After that it is recommended to binarize image by GIMP's "Colors" -> "Threshold"
+After that it is recommended to convert to a 1-bit (black and white) image, eg. GIMP's "Colors" -> "Threshold"
 
 ==== Open images
 ////
@@ -116,7 +120,7 @@ image::images/OPEN.PNG[]
 ファイル選択ダイアログが開くので、読み込む対象の画像ファイルを選択します。 +
 複数枚の画像を同時に選択することも可能です。
 ////
-Click folder botton on the left pain to open images.
+Click the folder button on the left pane to open images.
 
 image::images/OPEN.PNG[]
 
@@ -130,7 +134,7 @@ Select image(s) to recognize in file select dialog.
 読み取りを実行する前にページを移動すると選択範囲がクリアされてしまいます。
 ////
 Do the following steps #page by page#. +
-If you move page before recognition, the selected regions will be cleared. 
+Note: if you change pages before recognition, the selected regions will be cleared. 
 ====
 ////
 プログラムリストとして読み取る範囲をドラッグして指定します。 +
@@ -145,16 +149,16 @@ image::images/Image-130218-034520.789.png[]
 選択が終わったら、ツールバー上の「Recocnize Selection」ボタンをクリックして読み取りを実行します。 +
 「Recocnize Selection」ボタンはプルダウンになっており、BASICプログラムを読み取る際は「tessdata/n6x」、マシン後を読み取る際は「tessdata/hex」を選択した状態で実行してください。
 ////
-If you finished selecting region, click "Recognize Selection" to execute recognition. +
+When you have finished selecting your region, click "Recognize Selection" to execute recognition. +
 "Recognize Selection" is pull-down button and you can select language here. +
-If you want to recognize BASIC program listing choose "tessdata/bas". If you want to recognize hexadecimal program listing, e.g.MLX format choose "tessdata/hex". 
+If you want to recognize BASIC program listing choose "tessdata/bas". If you want to recognize hexadecimal program listing, e.g. MLX format choose "tessdata/hex". 
 
 image::images/RECOGNIZE.PNG[]
 
 ////
 読み取りにはかなりの時間がかかります。気長に待ってください。
 ////
-It takes very long time to recognize.
+It takes a very long time to recognize.
 
 ==== Reformat text
 ////
@@ -163,7 +167,7 @@ It takes very long time to recognize.
 image::images/Image-130218-043350.929.png[]
 このテキストをお好みのテキストエディタにコピー、ペーストしてください。
 ////
-When recognition is finished, recognized text appears on the right pane. 
+When recognition is finished, recognized text appears in the right pane. 
 
 image::images/Image-130218-043350.929.png[]
 Copy and paste the text to your favorite text editor.
