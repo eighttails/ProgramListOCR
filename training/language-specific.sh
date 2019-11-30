@@ -18,11 +18,28 @@
 #=============================================================================
 
 # Array of all valid language codes.
-VALID_LANGUAGE_CODES="n6x hex"
+VALID_LANGUAGE_CODES="bas n6x hex"
 
 # Codes for which we have webtext but no fonts:
 UNUSABLE_LANGUAGE_CODES=""
 
+BAS_FONTS=( \
+    "DotMatrix" \
+    "MisakiGothic" \
+    "MisakiMincho" \
+    "VL Gothic" \
+    "TakaoGothic" \
+    "TakaoMincho" \
+    "PixelMplus10" \
+    "PixelMplus12" \
+    "P6mk2mode1page1font" \
+    "P6mk2mode5page1font" \
+    "P6 Printer Routine" \
+    "PiO Printer A" \
+    "MSX-WIDTH40J" \
+    "lcdfont" \
+    "N-Font_Original" \
+    )
 N6X_FONTS=( \
     "DotMatrix" \
     "MisakiGothic" \
@@ -117,6 +134,14 @@ set_lang_specific_parameters() {
           TRAINING_DATA_ARGUMENTS+=" --no_space_in_output --desired_bigrams="
           FILTER_ARGUMENTS="--charset_filter=n6x --segmenter_lang=n6x"
           test -z "$FONTS" && FONTS=( "${N6X_FONTS[@]}" ) ;;
+
+    bas ) MEAN_COUNT="15"
+          WORD_DAWG_FACTOR=0.015
+          GENERATE_WORD_BIGRAMS=0
+          TRAINING_DATA_ARGUMENTS+=" --infrequent_ratio=10000"
+          TRAINING_DATA_ARGUMENTS+=" --no_space_in_output --desired_bigrams="
+          FILTER_ARGUMENTS="--charset_filter=bas --segmenter_lang=bas"
+          test -z "$FONTS" && FONTS=( "${BAS_FONTS[@]}" ) ;;
 
     *) err_exit "Error: ${lang} is not a valid language code"
   esac
