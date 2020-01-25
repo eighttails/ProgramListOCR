@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <Package>   
-    <DisplayName>基本コンポーネント</DisplayName>   
-    <Description>gImageReaderとOCR言語ファイル(N6X-Basic,マシン語)のセットです。</Description>   
-    <Version>1.4.0</Version>   
-    <ReleaseDate>2019-07-08</ReleaseDate>   
+    <DisplayName>Basic components</DisplayName>   
+    <Description>Compilation of gImageReader and OCR language files(Basic,Machine language)</Description>   
+    <Version>1.5.0</Version>   
+    <ReleaseDate>2020-01-25</ReleaseDate>   
     <Default>script</Default>   
     <Licenses>     
         <License name="gImageReader" file="GPLv3.txt" />   

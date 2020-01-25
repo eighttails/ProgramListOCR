@@ -15,16 +15,6 @@ else
     ARCH='x86_64'
 fi
 
-#Qt Installer Frameworkをインストール
-#MSYS2の最新版でビルドしたインストーラーは動作しないので旧バージョンをインストールする。
-#https://bugreports.qt.io/browse/QTIFW-1312
-if [ "$(command -v binarycreator | wc -l)" == "0" ];then
-    pushd /tmp
-    QTIFW_PACKAGE=mingw-w64-$ARCH-qt-installer-framework-git-r2975.36059724-1-any.pkg.tar.xz
-    wget -c http://repo.msys2.org/mingw/$ARCH/$QTIFW_PACKAGE
-    pacman -U --needed --noconfirm $QTIFW_PACKAGE
-    popd
-fi
 
 #pacmanのパッケージ取得オプション
 PACMAN_INSTALL_OPTS=()
@@ -51,6 +41,7 @@ mkdir -p $PRODUCTDATA/share
 #READMEを生成
 pushd $PRODUCTDATA
 asciidoctor $SCRIPT_DIR/../README.adoc -D .
+asciidoctor $SCRIPT_DIR/../README-J.adoc -D .
 popd
 
 #インストーラー作成作業ディレクトリにgImageReaderをビルド
@@ -67,5 +58,5 @@ cp -r $SCRIPT_DIR/../training/tessdata_out $PRODUCTDATA/share/tessdata
 
 #インストーラーをビルド
 cd $SCRIPT_DIR/worktree
-binarycreator -v -f -c config/config.xml -p packages ../ProgramListOCRSetup-$BIT-$VERSION.exe 
+$MINGW_PREFIX/local/qt5-static/bin/binarycreator -v -f -c config/config.xml -p packages ../ProgramListOCRSetup-$BIT-$VERSION.exe 
 

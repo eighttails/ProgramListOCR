@@ -19,6 +19,12 @@ Component.prototype.createOperations = function()
     if(systemInfo.kernelType === "winnt"){
       //Readme.txt用のショートカット
       component.addOperation("CreateShortcut"
+                             , "@TargetDir@/README_J.html"
+                             , "@StartMenuDir@/README_J.lnk"
+                             , "workingDirectory=@TargetDir@"
+                             , "iconPath=%SystemRoot%/system32/SHELL32.dll"
+                             , "iconId=2")
+      component.addOperation("CreateShortcut"
                              , "@TargetDir@/README.html"
                              , "@StartMenuDir@/README.lnk"
                              , "workingDirectory=@TargetDir@"

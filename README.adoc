@@ -1,42 +1,73 @@
-= Program List OCR マニュアル
+= Program List OCR
 eighttails <http://eighttails.seesaa.net>
-:toc-title: 目次
 :toc: left
 :numbered:
 :data-uri:
+:icons: font
 
-== はじめに
+== What is this?
+////
 本ソフトは、主に1980年代のパソコン雑誌に掲載されたプログラムリストの読み取りに特化したOCRです。 +
 紙面をスキャナで取り込み、OCRでテキストファイルにしたものをエミュレーター用のテープイメージ等に変換するという使い方を想定しています。 +
 本ソフトは、以下のオープンソースソフトウェアの組み合わせです。
-
 * Tesseract(OCRエンジン)
 * gImageReader(GUIフロントエンド)
+////
+_Program List OCR_ is a peice of OCR (Optical Character Recognition) software which is specific to computer program listings published in 1980s. +
 
+It converts scanned program listing images into plain text. You can convert this text into an emulator's input file, e.g. casette tape image +  
+
+_Program List OCR_ is a compilation of following open souce softwares. +
+
+* Tesseract (OCR engine)
+* gImageReader (GUI frontend)
+
+////
 上記に加えて、独自にOCRに学習させて作成した以下の言語ファイルを含んでいます。
 
-* BASIC(PC-6001シリーズ用N6X-Basic)
+* BASIC (PC-6001シリーズ用N6X-Basic)
 * 16進ダンプリスト
+////
+And it also contains special OCR language model files. 
 
-BASIC言語に関しては、フォントや単語、かなやグラフィック文字の仕様などPC-6001に合わせて言語ファイルを作ってありますので、他機種のプログラムをそのまま読み込むのは難しいと思われますが、MS系のBASICで英数字のみに割り切ればもしかしたら読めるかもしれません。 +
-ダンプリストの方はBASICよりは汎用的に使えると思います。こちらは読み取り精度向上のため、16進数+α(0-9,A-F,Sum)以外の文字は使われていないという前提で読み込むようになっています。
+* BASIC (Generic Basic Langauge)
+* N6X-BASIC (BASIC for NEC PC-6001 (Japanese))
+* Hexadecimal machine language
 
-== おことわり
+BASIC (bas) model is for generic BASIC language listings. It recognizes ASCII printable characters. +
+
+N6X-BASIC (n6x) model is dedicated to NEC PC-6001. It recognizes ASCII and PC-6001's Japanese and graphical characters. +
+
+Hexadecimal machine language(hex) model recognizes only hexadecimal numbers and some extra characters(0-9,A-F,Sum). Therefore it achives better accuracy. +
+
+
+== Disclaimer
+////
 読み取りできるプログラムリストは紙面の状態や印字に使われているプリンタ、フォントによりかなり相性があります。その点は割り切ってご利用をお願いします。
+////
+OCR accuracy depends on quality of printing, scanning, used printer model, and fonts. +
 
-== 使用方法
-=== インストール方法
+
+== How to use
+=== Install
+////
 ProgramListOCRSetup.exeをダブルクリックしてインストールします。 +
 インストーラーの指示に従って操作すれば完了です。
+////
+. Double click ProgramListOCRSetup....exe
+. Follow the instructions of the installer.
 
-=== 起動方法
+=== Start
+////
 スタートメニューから「Program List OCR」->「gImageReader」を選択するとOCRのGUIが起動します。
+////
+Launch "Program List OCR" -> "gImageReader" from the Start Menu.
 
 image::images/Image-120218-055039.703.png[]
 
-=== 操作手順
-==== 画像スキャン、前処理
-
+=== Operating instructions
+==== Scan images and preprocessing
+////
 読み込む対象のプログラムが掲載された紙面をスキャンします。 +
 スキャン後はテキストの傾き、ゆがみがなるべく無い様に補正してください。 +
 画像の補正方法について、私のやり方をブログで公開していますので、よろしければ参考にしてください。 +
@@ -49,6 +80,18 @@ http://eighttails.seesaa.net/article/283953696.html
 * TIFFまたは高画質設定のJPEG
 
 です。 +
+////
+Scan program listings with your document scanner. (Taking picture with camera is not recommended) +
+Preferred image format is:
+
+* 600dpi
+* grayscale
+* TIFF or high quality JPEG
+
+You should deskew and normalize your images. + 
+https://scantailor.org/[Scantailor] is recommended for preprocessing. 
+
+////
 文字が薄い場合、 http://www.gimp.org[GIMP] を使って補正すると読み取り精度が上がります。 +
 GIMPのメニューから「フィルター」->「汎用」->「明るさの最大値」を実行するとかすれた文字を補正することができます。
 
@@ -58,93 +101,91 @@ image::images/BEFORE.PNG[]
 image::images/AFTER.PNG[]
 
 その後、GIMPのメニューから「色」->「しきい値」を用いて画像を2値化しておくことをお勧めします。
+////
+For better accuracy you can thicken printed characters with http://www.gimp.org[GIMP]. +
+Open image with GIMP and do "Filters" -> "Generic" -> "Erode". 
 
-==== 画像読み込み
+.Before "Erode"
+image::images/BEFORE.PNG[]
+.After "Erode"
+image::images/AFTER.PNG[]
+
+After that it is recommended to convert to a 1-bit (black and white) image, eg. GIMP's "Colors" -> "Threshold"
+
+==== Open images
+////
 画像を読み込むには、画面左ペインのフォルダボタンをクリックします。
 
 image::images/OPEN.PNG[]
 
 ファイル選択ダイアログが開くので、読み込む対象の画像ファイルを選択します。 +
 複数枚の画像を同時に選択することも可能です。
+////
+Click the folder button on the left pane to open images.
 
-==== 読み取り範囲指定、実行
+image::images/OPEN.PNG[]
+
+Select image(s) to recognize in file select dialog.
+
+==== Select region and recognize
 [WARNING]
 ====
+////
 このステップの操作は#1ページずつ#行ってください。 +
 読み取りを実行する前にページを移動すると選択範囲がクリアされてしまいます。
+////
+Do the following steps #page by page#. +
+Note: if you change pages before recognition, the selected regions will be cleared. 
 ====
+////
 プログラムリストとして読み取る範囲をドラッグして指定します。 +
 多段組になっていて読み取り範囲が複数ある場合はCTRL+ドラッグで選択範囲を追加できます。
+////
+Drag mouse and select region to recognize. +
+You can add region by ctrl + mouse drag. 
 
 image::images/Image-130218-034520.789.png[]
 
+////
 選択が終わったら、ツールバー上の「Recocnize Selection」ボタンをクリックして読み取りを実行します。 +
 「Recocnize Selection」ボタンはプルダウンになっており、BASICプログラムを読み取る際は「tessdata/n6x」、マシン後を読み取る際は「tessdata/hex」を選択した状態で実行してください。
+////
+When you have finished selecting your region, click "Recognize Selection" to execute recognition. +
+"Recognize Selection" is pull-down button and you can select language here. +
+If you want to recognize BASIC program listing choose "bas". If you want to recognize hexadecimal program listing, e.g. MLX format choose "hex". 
 
 image::images/RECOGNIZE.PNG[]
 
+////
 読み取りにはかなりの時間がかかります。気長に待ってください。
+////
+It takes a very long time to recognize.
 
-==== テキスト整形
+==== Reformat text
+////
 読み取りが完了すると、右のペインに認識結果が現れます。
 
 image::images/Image-130218-043350.929.png[]
 このテキストをお好みのテキストエディタにコピー、ペーストしてください。
+////
+When recognition is finished, recognized text appears in the right pane. 
 
+image::images/Image-130218-043350.929.png[]
+Copy and paste the text to your favorite text editor.
+
+////
 この状態のテキストは行のつながりを認識できていません。印刷の都合で2行に折り返されてしまった行は分割して出力されているので、目視で連結してやる必要があります。 +
+////
+At this point line-wrapping is not recognized. +
+You have to concatenate wrapped lines manually.
 
+==== Finish
+Reformatted text can be used for your emulator's input, e.g.casette tape image file. +
+Enjoy!
 
-==== 後処理
-整形が終わったテキストファイルは、エミュレータ用のテープイメージ変換ツールなどに渡してご利用ください。
-
-PC-6001用BASICの場合は、拙作の http://eighttails.seesaa.net/article/305067428.html[N6XBasicChecker] を使えばシンタックスエラーレベルの認識ミスはイメージ変換、実行前に発見することができます。
-
-== 使用フォント
-今回のOCRは、Googleより配布されている英語用の言語データをベースに以下のフォントを使ってファインチューニングを行っています。 +
-ビットマップフォント、ドットマトリクス印字によるフォントに対応するためプログラムリストによく使われるフォントを追加していますが、Googleの学習済みモデルをベースにしているので、たいていの書体は読めると思います。 +
-フォント自体の再配布を行うことはできないので、学習用スクリプト内でダウンロードして使用するようになっています。 +
-
-.DotMatrix
-https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
-
-.GP4 LCD Font
-https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
-
-.P6TrueTypeフォント
-Hashi様作 +
-http://p6ers.net/hashi/p6ttf.html
-
-.VLゴシック
-鈴木大輔様作 +
-http://vlgothic.dicey.org/
-
-.Takaoフォント
-https://launchpad.net/takao-fonts
-
-.PixelMPlus
-itouhiro様作 +
-http://itouhiro.hatenablog.com/entry/20130602/font
-
-.MSX風Truetypeフォント
-Gigamix様作 +
-http://www.gigamix.jp/download/gigamix/msxfont.php
-
-.美咲フォント
-門真なむ様作 +
-http://littlelimit.net/misaki.htm
-
-.N-Font
-モ～リン様作 +
-http://upd780c1.g1.xrea.com/pc-8001/index.html#TTF
-
-
-.P6プリンタルーチンフォント
-Mr.PCばんざーい!!様作 +
-電波新聞社刊「PC-6001・6601プログラム大全集」掲載プログラム内のフォントをeighttailsがTrueType化
-
-== 開発者情報
-=== ライセンス
-配布しているバイナリのライセンスは以下の通りとなります。
+== Developer information
+=== License
+Licence of bundled softwares are as follows.
 
 Tesseract:: 
 * Apache License 2.0
@@ -153,107 +194,7 @@ gImageReader::
 * GNU General Public License v3.0
 * https://github.com/manisandro/gImageReader
 
+////
 本リポジトリに含まれるスクリプトはTesseractに含まれているものを改変したものですので、Apache License 2.0とします。
-
-
-=== ビルド方法
-MSYS2環境上でビルドします。 +
-
-. http://sourceforge.net/projects/msys2/[こちら]からMSYS2をダウンロードしてインストールしてください。 +
-VC++はサポートしていません。 +
-MSYS2はパッケージのバージョンアップが早く、またバージョンアップによるデグレードが非常に多いため、パッケージのアップデート(`pacman -Sy`)を行わず、バージョンを固定して使うことをおすすめします。作者がビルド、動作を確認しているのは以下のインストーラーで構築した環境です。(64ビット用) +
-https://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-x86_64-20190524.exe
-. MSYSをインストールしたフォルダのmingw32.exe(32ビット版をビルドする場合)またはmingw64.exe(64ビット版をビルドする場合)を実行。 +
-. ダウンロードしたProgramListOCRのソースをMSYS上のホームフォルダに解凍。 +
-. `cd ProgramListOCR` を実行し、ソースフォルダにカレントを移動。 +
-. `setup/build.sh` を実行し、学習用フォントのダウンロードおよびTesseract,gImageReaderのビルドを行う。 +
-ビルドには非常に時間がかかります。気長に気長にお待ちください。
-
-=== 学習方法
-Tesseract本体に含まれている学習用スクリプトを改変することで、P6ユーザー以外の人が独自に言語ファイルを作成したり、学習データにフォントを追加して認識精度を向上したりすることができます。 +
-ただし、元のスクリプトがbash向けに作られているので、bashの知識があることが前提になります。
-
-本ソフトで提供している学習用スクリプトは以下の通りです。
-
-`training/makeN6XTessdata.sh`::
-N6X-Basic用学習スクリプト
-
-`training/makeHexTessdata.sh`::
-16進ダンプリスト用学習スクリプト
-
-上記のスクリプトをbash上で実行すると、 `training/tessdata` フォルダに言語ファイルが生成されます。 +
-学習に要する時間ですが、ダンプリストの方は1日程度で収束しますが、BASICの方はError rateが0.1を切るぐらいまで(私の環境で1週間程度)は回し続ける必要があります。 +
-学習を終了するには適当なところでctrl+Cを押して強制的に止めてください。途中経過は保存されてますので、再度同じスクリプトを実行するとその時点から学習を再開します。
-
-=== 言語ファイル作成方法
-ここでは、独自に言語ファイルを作成し、PC-6001以外の機種、またはBASIC以外のプログラムに対応させる方法を簡単に記述します。 +
-今回採用しているTesseract4.0はドキュメントも十分にありません。本当に使いこなすためには本家Githubのwikiやソースコード、issuesなどを読み込んでキャッチアップするのが不可欠です。 +
-https://github.com/tesseract-ocr/tesseract/wiki/TrainingTesseract-4.00
-
-学習に用いるスクリプトは `training` フォルダ、言語に関するデータは `training/langdata` に配置されています。 +
-P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(ここでは `xxx`)を作るには、
-
-* `langdata/n6x` 以下のファイルを `langdata/xxx` にコピーし、すべてのファイル名中の `n6x` を `xxx` にリネーム
-* `makeN6XTessData.sh` を `makeXXXTessData.sh` にコピー
-
-
-[WARNING]
-====
-ここで作成する言語設定ファイルは文字コードUTF-8,改行コードLF(UNIX)で保存する必要があります。 +
-ここをWindowsの癖でSJIS,CRLFで保存すると原因不明のエラーに悩まされることになるので注意しましょう。
-====
-
-`training`以下のファイルについて、以下のように修正します。
-
-* `training/makeXXXTessdata.sh`
-** スクリプト中の `n6x` を `xxx` に置換
-
-* `training/language-specific.sh`
-** スクリプト中の `N6X_FONTS` のリストに学習させたいフォント名を追加 +
-フォントは`fonts`フォルダ内にコピーすること。Windowsのシステムにインストールする必要はない。
-** スクリプト中の `N6X` を `XXX` に置換
-** スクリプト中の `n6x` を `xxx` に置換
-
-`langdata/xxx` 以下のファイルについて、以下のように修正します。
-
-* `desired_characters`
-** その言語で使用可能な文字をすべて列挙する。
-
-* `xxx.training_text`
-** 学習に使用するテキストをコピー、ペーストする。
-** このテキストと `language-specific.sh` に定義されたフォントを用いて学習用の画像が生成される。
-** 実際のプログラムリストを使用することが望ましい。
-** 実際のプログラムでは出現確率が低い文字は学習されない可能性があるため、冒頭にすべての文字を含んだ文字見本を入れておく。
-
-* `xxx.wordlist`
-** その言語で使用される予約語を列挙する。
-
-上記以外の設定ファイルは制御が難しいため、いじらない方がよいでしょう。
-
-=== インストーラー作成方法
-インストーラーを作成するには、上記のステップで学習を実行して言語ファイルを作成してあることが前提です。
-`installer/makeInstaller.sh` を実行すると、インストーラーの実行ファイル `installer/ProgramListOCRSetup.exe` が生成されます。 +
-
-
-== 更新履歴
-.1.4.0　2019/7/11
-* Tesseract4.1.0の正式版に更新 +
-* 学習するフォントを追加
-
-.1.3.0　2019/1/1
-* 学習するフォントを追加
-
-.1.2.0　2018/11/10
-* Tesseract4.0.0,gImageReader3.3.0の正式版に更新 +
-* 学習データ生成方法の見直し
-** 文字間隔が多少開いていても読めるように学習。
-
-.1.1.0　2018/06/07
-* Tesseract,gImageReaderを更新 +
-* 学習データ生成方法の見直し
-** にじんだ文字よりかすれた文字を優先して学習するよう画像を生成。
-** 実際のプログラムリストの印刷状態に近づくよう、行間を密着させた画像を生成。
-** DotMatrixフォントを学習から除外(文字が薄くなりすぎて学習エラーになるため)
-
-.1.0.0　2018/02/14
-* 初版 +
+////
+Scripts in this repository are modified version of Tesseract and licensed under Apache License 2.0, same as Tesseract.
