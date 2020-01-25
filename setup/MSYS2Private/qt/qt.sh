@@ -22,7 +22,7 @@ popd
 function makeQtSourceTree(){
 #Qt
 QT_MAJOR_VERSION=5.12
-QT_MINOR_VERSION=.5
+QT_MINOR_VERSION=.6
 QT_VERSION=$QT_MAJOR_VERSION$QT_MINOR_VERSION
 QT_ARCHIVE_DIR=qt-everywhere-src-$QT_VERSION
 QT_ARCHIVE=$QT_ARCHIVE_DIR.tar.xz
@@ -62,6 +62,9 @@ else
         patch -p1 -i $SCRIPT_DIR/0041-qt-5.4.0-Fix-mingw-create_cmake-prl-file-has-no-lib-prefix.patch
         patch -p1 -i $SCRIPT_DIR/0042-qt-5.4.0-static-cmake-also-link-plugins-and-plugin-deps.patch
         patch -p1 -i $SCRIPT_DIR/0043-qt-5.5.0-static-cmake-regex-QT_INSTALL_LIBS-in-QMAKE_PRL_LIBS_FOR_CMAKE.patch
+
+        #qdocのビルドが通らないので暫定パッチ
+        patch -p1 -i $SCRIPT_DIR/0302-ugly-hack-disable-qdoc-build.patch
     fi
 
     #MSYSでビルドが通らない問題への対策パッチ
@@ -166,11 +169,9 @@ QT_STATIC_CONF_OPTS+=("-nomake" "examples")
 QT_STATIC_CONF_OPTS+=("-D" "JAS_DLL=0")
 QT_STATIC_CONF_OPTS+=("-openssl-linked")
 QT_STATIC_CONF_OPTS+=("-no-dbus")
-# 32ビットでqdocのstaticビルドが通らないので暫定措置
-if [ "$BIT" == "32bit" ]; then
-QT_STATIC_CONF_OPTS+=("-skip" "qttools")
-fi
 
+export QDOC_SKIP_BUILD=1
+export QDOC_USE_STATIC_LIBCLANG=1
 OPENSSL_LIBS="$(pkg-config --static --libs openssl)" \
 ../$QT_SOURCE_DIR/configure "${QT_COMMON_CONF_OPTS[@]}" "${QT_STATIC_CONF_OPTS[@]}" &> ../qt5-static-$BIT-config.status
 exitOnError
@@ -183,6 +184,9 @@ sed -i -e "s|-ltiff|-ltiff -llzma|g" $QT5_STATIC_PREFIX/plugins/imageformats/qti
 sed -i -e "s|-ltiff|-ltiff -llzma|g" $QT5_STATIC_PREFIX/plugins/imageformats/qtiffd.prl
 
 popd
+
+unset QDOC_SKIP_BUILD
+unset QDOC_USE_STATIC_LIBCLANG
 rm -rf $QT5_STATIC_BUILD
 }
 
@@ -194,8 +198,8 @@ fi
 
 #Qt Creator
 cd ~/extlib
-QTC_MAJOR_VER=4.10
-QTC_MINOR_VER=.1
+QTC_MAJOR_VER=4.11
+QTC_MINOR_VER=.0
 QTC_VER=$QTC_MAJOR_VER$QTC_MINOR_VER
 QTC_SOURCE_DIR=qt-creator-opensource-src-$QTC_VER
 QTC_ARCHIVE=$QTC_SOURCE_DIR.tar.xz
@@ -234,6 +238,50 @@ popd
 rm -rf $QTCREATOR_BUILD
 }
 
+function buildQtInstallerFramework(){
+if [ -e $QT5_STATIC_PREFIX/bin/archivegen.exe -a $((FORCE_INSTALL)) == 0 ]; then
+	echo "Qt Installer Framework is already installed."
+	return 0
+fi
+
+#Qt Installer Framework
+cd ~/extlib
+QTI_MAJOR_VER=3.2
+QTI_MINOR_VER=.0
+QTI_VER=$QTI_MAJOR_VER$QTI_MINOR_VER
+QTI_SOURCE_DIR=qt-installer-framework-opensource-src-$QTI_VER
+QTI_ARCHIVE=$QTI_SOURCE_DIR.tar.gz
+#QTI_RELEASE=development_releases
+QTI_RELEASE=official_releases
+wget -c https://download.qt.io/official_releases/qt-installer-framework/$QTI_VER/$QTI_ARCHIVE
+if [ -e $QTI_SOURCE_DIR ]; then
+	# 存在する場合
+	echo "$QTI_SOURCE_DIR already exists."
+else
+	# 存在しない場合
+    mkdir $QTI_SOURCE_DIR
+	tar xf $QTI_ARCHIVE -C $QTI_SOURCE_DIR
+    
+    #リソースファイルのマクロ展開に失敗する対策
+    pushd $QTI_SOURCE_DIR/src/sdk
+    sed -i -e "s|IFW_VERSION_STR_WIN32|\"$QTI_VER\\\\0\"|" installerbase.rc
+    popd
+fi
+
+QTINSTALLERFW_BUILD=qt-installer-fw-$BIT
+rm -rf $QTINSTALLERFW_BUILD
+mkdir $QTINSTALLERFW_BUILD
+pushd $QTINSTALLERFW_BUILD
+
+$QT5_STATIC_PREFIX/bin/qmake CONFIG+="release silent" CONFIG-=precompile_header ../$QTI_SOURCE_DIR/installerfw.pro
+exitOnError
+
+makeParallel && make install
+exitOnError
+popd
+rm -rf $QTINSTALLERFW_BUILD
+}
+
 
 
 #----------------------------------------------------
@@ -243,13 +291,6 @@ commonSetup
 
 export PKG_CONFIG="$(cygpath -am $MINGW_PREFIX/bin/pkg-config.exe)"
 export LLVM_INSTALL_DIR=${MINGW_PREFIX}
-export FORCE_MINGW_QDOC_BUILD=1
-if [ "$BIT" == "64bit" ]; then
-#64ビット版ではこの環境変数をセット
-#32ビット版では外さないとビルドが通らない
-export QDOC_USE_STATIC_LIBCLANG=1
-fi
-export QTC_FORCE_CLANG_LIBTOOLING=1
 
 #Qtのインストール場所
 QT5_SHARED_PREFIX=$PREFIX/qt5-shared
@@ -270,5 +311,9 @@ exitOnError
 
 #QtCreatorをビルド
 buildQtCreator
+exitOnError
+
+#Qt installer frameworkをビルド
+buildQtInstallerFramework
 exitOnError
 

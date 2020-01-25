@@ -14,7 +14,7 @@ echo "QuaZip is already installed."
 exit 0
 fi
 
-QUAZIP_VERSION=0.8
+QUAZIP_VERSION=0.8.1
 QUAZIP_TAG=v$QUAZIP_VERSION
 QUAZIP_ARCHIVE=quazip-$QUAZIP_TAG.tar.gz
 QUAZIP_SRC_DIR=quazip-$QUAZIP_VERSION
