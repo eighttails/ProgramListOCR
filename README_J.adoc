@@ -162,7 +162,7 @@ gImageReader::
 === ビルド方法
 MSYS2環境上でビルドします。 +
 
-. http://sourceforge.net/projects/msys2/[こちら]からMSYS2をダウンロードしてインストールしてください。 +
+. https://github.com/msys2/msys2-installer/releases[こちら]からMSYS2をダウンロードしてインストールしてください。 +
 VC++はサポートしていません。 +
 MSYS2はパッケージのバージョンアップが早く、またバージョンアップによるデグレードが非常に多いため、パッケージのアップデート(`pacman -Sy`)を行わず、バージョンを固定して使うことをおすすめします。作者がビルド、動作を確認しているのは以下のインストーラーで構築した環境です。(64ビット用) +
 https://github.com/msys2/msys2-installer/releases/download/2020-06-02/msys2-base-x86_64-20200602.sfx.exe
