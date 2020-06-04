@@ -18,7 +18,8 @@ $MINGW_PACKAGE_PREFIX-libarchive \
 $MINGW_PACKAGE_PREFIX-cairo \
 $MINGW_PACKAGE_PREFIX-pango \
 $MINGW_PACKAGE_PREFIX-icu \
-$MINGW_PACKAGE_PREFIX-docbook-xsl
+$MINGW_PACKAGE_PREFIX-docbook-xsl \
+2>/dev/null
 
 exitOnError
 }
@@ -47,6 +48,9 @@ tar xf $TESSERACT_ARCHIVE
 mv $TESSERACT_SRC_DIR $TESSERACT_BUILD_DIR
 pushd $TESSERACT_BUILD_DIR
 
+#asciidocが動かない問題への暫定対応
+sed -i -e 's/AM_CONDITIONAL(\[ASCIIDOC\], true)/AM_CONDITIONAL([ASCIIDOC], false)/' configure.ac
+
 if [ -e Makefile ]; then
 make clean
 fi
@@ -63,7 +67,6 @@ export LIBLEPT_HEADERSDIR=$PREFIX/include/leptonica
 --prefix=$PREFIX \
 --with-extra-includes=$PREFIX/include \
 --with-extra-libraries=$PREFIX/lib 
-
 
 exitOnError
 
