@@ -1,5 +1,6 @@
 #!/bin/bash 
 SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
+export PATH=$MINGW_PREFIX/local/bin:$PATH
 
 if [ "$1" == "" ]; then
     VERSION="dev"
@@ -26,7 +27,9 @@ export PACMAN_INSTALL_OPTS
 #依存ライブラリをインストール
 pacman "${PACMAN_INSTALL_OPTS[@]}" \
     $MINGW_PACKAGE_PREFIX-ntldd \
-    $MINGW_PACKAGE_PREFIX-asciidoctor
+    $MINGW_PACKAGE_PREFIX-asciidoctor \
+    $MINGW_PACKAGE_PREFIX-qt-installer-framework \
+    2>/dev/null
 if [ $? -ne 0 ]; then
     echo "ERROR."
     exit 1
@@ -41,22 +44,23 @@ mkdir -p $PRODUCTDATA/share
 #READMEを生成
 pushd $PRODUCTDATA
 asciidoctor $SCRIPT_DIR/../README.adoc -D .
-asciidoctor $SCRIPT_DIR/../README-J.adoc -D .
+asciidoctor $SCRIPT_DIR/../README_J.adoc -D .
 popd
 
 #インストーラー作成作業ディレクトリにgImageReaderをビルド
 GIMAGEREADER_PREFIX=$PRODUCTDATA $SCRIPT_DIR/../setup/MSYS2Private/gimagereader/gimagereader.sh
 
 #Qtの依存ライブラリを集約する
-windeployqt --release $PRODUCTDATA/bin/gimagereader-qt5.exe
+windeployqt $PRODUCTDATA/bin/gimagereader-qt5.exe
 
 #Qt以外の依存ライブラリを集約する
 ntldd -R $PRODUCTDATA/bin/gimagereader-qt5.exe | sed "s|\\\|/|g" | grep "$(cygpath -am $MINGW_PREFIX)/" | sed -e "s/^.*=> \(.*\) .*/\1/" | xargs -I{} cp {} $PRODUCTDATA/bin/
 
 #学習済み言語データをコピー
 cp -r $SCRIPT_DIR/../training/tessdata_out $PRODUCTDATA/share/tessdata
+cp $SCRIPT_DIR/../training/tessdata/eng.traineddata $PRODUCTDATA/share/tessdata
 
 #インストーラーをビルド
 cd $SCRIPT_DIR/worktree
-$MINGW_PREFIX/local/qt5-static/bin/binarycreator -v -f -c config/config.xml -p packages ../ProgramListOCRSetup-$BIT-$VERSION.exe 
+binarycreator -v -f -c config/config.xml -p packages ../ProgramListOCRSetup-$BIT-$VERSION.exe 
 
