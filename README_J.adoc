@@ -165,7 +165,7 @@ MSYS2環境上でビルドします。 +
 . https://github.com/msys2/msys2-installer/releases[こちら]からMSYS2をダウンロードしてインストールしてください。 +
 VC++はサポートしていません。 +
 MSYS2はパッケージのバージョンアップが早く、またバージョンアップによるデグレードが非常に多いため、パッケージのアップデート(`pacman -Sy`)を行わず、バージョンを固定して使うことをおすすめします。作者がビルド、動作を確認しているのは以下のインストーラーで構築した環境です。(64ビット用) +
-https://github.com/msys2/msys2-installer/releases/download/2020-06-02/msys2-base-x86_64-20200602.sfx.exe
+https://github.com/msys2/msys2-installer/releases/download/2020-07-20/msys2-base-x86_64-20200720.sfx.exe
 . MSYSをインストールしたフォルダのmingw32.exe(32ビット版をビルドする場合)またはmingw64.exe(64ビット版をビルドする場合)を実行。 +
 . ダウンロードしたProgramListOCRのソースをMSYS上のホームフォルダに解凍。 +
 . `cd ProgramListOCR` を実行し、ソースフォルダにカレントを移動。 +
@@ -239,6 +239,10 @@ P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(�
 
 
 == 更新履歴
+.1.5.1　2020/8/7
+* Tesseract,gImageReaderを更新 +
+* スタートメニュー内のREADME_Jがリンク切れだったのを修正
+
 .1.5.0　2020/1/25
 * Tesseract,gImageReaderを更新 +
 * 汎用欧文BASIC言語ファイルおよび英語版ドキュメントを追加
