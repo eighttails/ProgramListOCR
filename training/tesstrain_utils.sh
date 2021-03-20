@@ -331,7 +331,7 @@ phase_I_generate_image() {
         local jobs=
         trap "kill $$" INT
         for font in "${FONTS[@]}"; do
-            sleep 5
+            sleep 1
             test $(jobs -r | wc -l) -ge $par_factor && wait -n
             generate_font_image "${font}" &
             jobs="$jobs $!"
