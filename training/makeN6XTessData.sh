@@ -26,7 +26,7 @@ export TEXT2IMAGE_EXTRA_ARGS=""
 --lang n6x \
 --linedata_only \
 --noextract_font_properties \
---exposures "0 2 4 6 -2 -4 -6 -8 -10 -12" \
+--exposures "0 2 4 6 -2 -4 -6 -8 -10" \
 --char_spacings "0.0 0.7 1.4" \
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \

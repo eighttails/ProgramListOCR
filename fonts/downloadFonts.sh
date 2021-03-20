@@ -8,15 +8,15 @@ fi
 cd $SCRIPT_DIR
 
 #DotMatrix
-# if [ ! -d $SCRIPT_DIR/DotMatrix-Regular ]; then
-# wget -c http://www.ffonts.net/DotMatrix-Regular.font.zip
-# unzip -d DotMatrix-Regular DotMatrix-Regular.font.zip
-# fi
+if [ ! -d $SCRIPT_DIR/dotmatrix ]; then
+wget -c https://www.cufonfonts.com/download/rf/dotmatrix -O dotmatrix.zip
+unzip -d dotmatrix dotmatrix.zip
+fi
 
-#DotMatrix-maisfontes
-if [ ! -e $SCRIPT_DIR/dotmatrix-1-2-maisfontes.zip ]; then
-wget --content-disposition --no-check-certificate https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
-unzip dotmatrix-1-2-maisfontes.zip -d DotMatrix
+#Verily serif mono
+if [ ! -d $SCRIPT_DIR/verily_serif_mono ]; then
+wget -c https://dl.dafont.com/dl/?f=verily_serif_mono -O verily_serif_mono.zip
+unzip -d verily_serif_mono verily_serif_mono.zip
 fi
 
 #GP4 LCD Font
@@ -74,6 +74,13 @@ wget -c http://www.gigamix.jp/download/gigamix/MSXW40J.TTF
 wget -c http://www.gigamix.jp/download/gigamix/MSXW32J.TTF
 popd
 fi
+
+#MSX Truetype Fonts
+if [ ! -d $SCRIPT_DIR/DumpListEditorVer037MSX0305 ]; then
+wget -c https://bugfire2009.ojaru.jp/DumpListEditorVer037MSX0305.zip
+unzip DumpListEditorVer037MSX0305.zip
+fi
+
 
 #Misaki fonts
 if [ ! -e $SCRIPT_DIR/misaki_ttf_2019-02-03a.zip ]; then

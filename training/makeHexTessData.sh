@@ -22,15 +22,15 @@ export PANGOCAIRO_BACKEND=fc
 if [ ! -e $SCRIPT_DIR/tessdata_tmp/hex/hex.unicharset ]; then
 ./tesstrain.sh \
 --fonts_dir $SCRIPT_DIR/../fonts \
---lang hex \
+--lang n6x \
 --linedata_only \
 --noextract_font_properties \
---exposures "-10 -8 -6 -4 -2 0 2 4 6" \
---char_spacings "0.0" \
+--exposures "0 2 4 6 -2 -4 -6 -8 -10" \
+--char_spacings "0.0 0.7 1.4" \
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \
 --output_dir $SCRIPT_DIR/tessdata_tmp 
-  
+
 exitOnError
 
 fi
@@ -90,8 +90,8 @@ exitOnError
 END=$(date +%s)
 DIFF=$((END-START))
 
-#‚·‚Å‚ÉŠ’èƒCƒeƒŒ[ƒVƒ‡ƒ“‚É’B‚µ‚Ä‚¢‚½ê‡‚·‚®I—¹‚·‚é‚Ì‚ÅA
-#‚»‚Ìê‡‚ÍƒCƒeƒŒ[ƒVƒ‡ƒ“”‚ğ‘‚â‚µ‚Ä‚â‚è’¼‚·
+#ã™ã§ã«æ‰€å®šã‚¤ãƒ†ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã«é”ã—ã¦ã„ãŸå ´åˆã™ãçµ‚äº†ã™ã‚‹ã®ã§ã€
+#ãã®å ´åˆã¯ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³æ•°ã‚’å¢—ã‚„ã—ã¦ã‚„ã‚Šç›´ã™
 if [ $DIFF -le 30 ]; then
 MAX_ITERATIONS=$(($MAX_ITERATIONS + 50000))
 else

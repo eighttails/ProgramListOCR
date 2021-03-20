@@ -13,7 +13,7 @@
 # tesstrain.sh
 #
 
-#=============================================================================
+#============================================================================
 # Language specific info
 #=============================================================================
 
@@ -24,59 +24,30 @@ VALID_LANGUAGE_CODES="bas n6x hex"
 UNUSABLE_LANGUAGE_CODES=""
 
 BAS_FONTS=( \
-    "DotMatrix" \
-    "MisakiGothic" \
-    "MisakiMincho" \
+    # "DotMatrix_TR" \
+    "MSX-FONT-Wide" \
+#    "MisakiGothic" \
+#    "MisakiMincho" \
     "VL Gothic" \
     "TakaoGothic" \
     "TakaoMincho" \
+    "Noto Sans Mono CJK JP Regular" \
+    "Noto Serif CJK JP SemiBold" \
+    "Verily Serif Mono" \
     "PixelMplus10" \
     "PixelMplus12" \
     "P6mk2mode1page1font" \
     "P6mk2mode5page1font" \
     "P6 Printer Routine" \
     "PiO Printer A" \
-    "MSX-WIDTH40J" \
+    "MSX-FONT-Wide" \
     "lcdfont" \
     "N-Font_Original" \
     )
-N6X_FONTS=( \
-    "DotMatrix" \
-    "MisakiGothic" \
-    "MisakiMincho" \
-    "VL Gothic" \
-    "TakaoGothic" \
-    "TakaoMincho" \
-    "PixelMplus10" \
-    "PixelMplus12" \
-    "P6mk2mode1page1font" \
-    "P6mk2mode5page1font" \
-    "P6 Printer Routine" \
-    "PiO Printer A" \
-    "MSX-WIDTH40J" \
-    "lcdfont" \
-    "N-Font_Original" \
-    )
+N6X_FONTS=("${BAS_FONTS[@]}")
+HEX_FONTS=("${BAS_FONTS[@]}")
 
-HEX_FONTS=( \
-    "DotMatrix" \
-    "MisakiGothic" \
-    "MisakiMincho" \
-    "VL Gothic" \
-    "TakaoGothic" \
-    "TakaoMincho" \
-    "PixelMplus10" \
-    "PixelMplus12" \
-    "P6mk2mode1page1font" \
-    "P6mk2mode5page1font" \
-    "P6 Printer Routine" \
-    "PiO Printer A" \
-    "MSX-WIDTH40J" \
-    "lcdfont" \
-    "N-Font_Original" \
-    )
-
-
+FLAGS_webtext_prefix=${FLAGS_webtext_prefix:-}
 
 # Set language-specific values for several global variables, including
 #   ${TEXT_CORPUS}
@@ -117,6 +88,8 @@ set_lang_specific_parameters() {
   # Language to mix with the language for maximum accuracy. Defaults to eng.
   # If no language is good, set to the base language.
   MIX_LANG="jpn"
+  EXPOSURES=${EXPOSURES:-}
+  FONTS=${FONTS:-}
 
   case ${lang} in
     hex ) MEAN_COUNT="15"
@@ -145,9 +118,9 @@ set_lang_specific_parameters() {
 
     *) err_exit "Error: ${lang} is not a valid language code"
   esac
-  if [[ ${FLAGS_mean_count} -gt 0 ]]; then
+  if [[ ${FLAGS_mean_count:-} -gt 0 ]]; then
     TRAINING_DATA_ARGUMENTS+=" --mean_count=${FLAGS_mean_count}"
-  elif [[ ! -z ${MEAN_COUNT} ]]; then
+  elif [[ ! -z ${MEAN_COUNT:-} ]]; then
     TRAINING_DATA_ARGUMENTS+=" --mean_count=${MEAN_COUNT}"
   fi
   # Default to Latin fonts if none have been set
