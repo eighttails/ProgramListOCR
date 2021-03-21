@@ -14,6 +14,9 @@ else
     SCRIPT_DIR=$(dirname $(readlink -f ${BASH_SOURCE:-$0}))
 fi
 
+cd $SCRIPT_DIR
+../fonts/downloadFonts.sh
+
 mkdir -p $SCRIPT_DIR/tessdata_out
 mkdir -p $SCRIPT_DIR/tessdata_tmp/n6x
 
