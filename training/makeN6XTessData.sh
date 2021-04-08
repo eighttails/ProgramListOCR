@@ -1,13 +1,4 @@
 #!/bin/bash 
-function exitOnError(){
-if [ $? -ne 0 ]; then
-    echo "ERROR."
-    exit 1
-else
-    echo "SUCCESS."
-fi
-}
-
 if [ "$MINGW_CHOST" != "" ]; then
     SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
 else
@@ -15,25 +6,28 @@ else
 fi
 
 cd $SCRIPT_DIR
+source common.sh
 ../fonts/downloadFonts.sh
 
 mkdir -p $SCRIPT_DIR/tessdata_out
 mkdir -p $SCRIPT_DIR/tessdata_tmp/n6x
 
-export PANGOCAIRO_BACKEND=fc 
+# export PANGOCAIRO_BACKEND=fc
+FONTS_DIR=$SCRIPT_DIR/../fonts
+# fc-cache -fv $FONTS_DIR
 
 if [ ! -e $SCRIPT_DIR/tessdata_tmp/n6x/n6x.unicharset ]; then
 export TEXT2IMAGE_EXTRA_ARGS=""
-./tesstrain.sh \
---fonts_dir $SCRIPT_DIR/../fonts \
+./tesstrain.py \
+--fonts_dir $FONTS_DIR \
 --lang n6x \
 --linedata_only \
+--distort_image \
 --noextract_font_properties \
---exposures "0 2 4 6 -2 -4 -6 -8 -10" \
---char_spacings "0.0 0.7 1.4" \
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \
 --output_dir $SCRIPT_DIR/tessdata_tmp 
+
   
 exitOnError
 
@@ -56,6 +50,8 @@ if [ ! -e $SCRIPT_DIR/tessdata_tmp/n6x_checkpoint ]; then
 combine_tessdata -e $SCRIPT_DIR/tessdata/jpn.traineddata \
 $SCRIPT_DIR/tessdata/jpn.lstm 
 exitOnError
+
+dos2unix $SCRIPT_DIR/tessdata_tmp/n6x.training_files.txt
 
 lstmtraining \
 --old_traineddata $SCRIPT_DIR/tessdata/jpn.traineddata \
@@ -94,8 +90,8 @@ exitOnError
 END=$(date +%s)
 DIFF=$((END-START))
 
-#‚·‚Å‚ÉŠ’èƒCƒeƒŒ[ƒVƒ‡ƒ“‚É’B‚µ‚Ä‚¢‚½ê‡‚·‚®I—¹‚·‚é‚Ì‚ÅA
-#‚»‚Ìê‡‚ÍƒCƒeƒŒ[ƒVƒ‡ƒ“”‚ğ‘‚â‚µ‚Ä‚â‚è’¼‚·
+#ã™ã§ã«æ‰€å®šã‚¤ãƒ†ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã«é”ã—ã¦ã„ãŸå ´åˆã™ãçµ‚äº†ã™ã‚‹ã®ã§ã€
+#ãã®å ´åˆã¯ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³æ•°ã‚’å¢—ã‚„ã—ã¦ã‚„ã‚Šç›´ã™
 if [ $DIFF -le 30 ]; then
 MAX_ITERATIONS=$(($MAX_ITERATIONS + 50000))
 else

@@ -5,3 +5,6 @@ installer/*.exe
 fonts/*
 *.swp
 *.lstm
+*.log
+.vscode
+__pycache__
