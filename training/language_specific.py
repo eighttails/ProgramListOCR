@@ -37,7 +37,7 @@ BAS_FONTS = [
     "MisakiMincho",
     "PixelMplus10",
     "PixelMplus12",
-    "DotMatrix_TR",
+    "DotMatrix",
     "lcdfont",
     "VL Gothic",
     "TakaoGothic",

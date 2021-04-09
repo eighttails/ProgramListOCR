@@ -8,9 +8,9 @@ fi
 cd $SCRIPT_DIR
 
 #DotMatrix
-if [ ! -d $SCRIPT_DIR/dotmatrix ]; then
-wget -c https://www.cufonfonts.com/download/rf/dotmatrix -O dotmatrix.zip
-unzip -d dotmatrix dotmatrix.zip
+if [ ! -d $SCRIPT_DIR/DotMatrix-Regular ]; then
+wget -c http://www.ffonts.net/DotMatrix-Regular.font.zip
+unzip -d DotMatrix-Regular DotMatrix-Regular.font.zip
 fi
 
 #Verily serif mono

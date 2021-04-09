@@ -90,8 +90,8 @@ def run_command(cmd, *args, env=None, retry_count = 5):
         log.debug(arg)
         # Workaround for https://bugs.python.org/issue33617
         # TypeError: argument of type 'WindowsPath' is not iterable
-        if isinstance(arg, pathlib.WindowsPath):
-            args[idx] = str(arg)
+        # if isinstance(arg, pathlib.WindowsPath):
+        args[idx] = str(arg)
 
     proc = subprocess.run(
         [cmd, *args], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env
