@@ -26,7 +26,7 @@ log = logging.getLogger(__name__)
 
 # Array of all valid language codes.
 VALID_LANGUAGE_CODES = (
-    "bas n6x hex"
+    "eng bas n6x hex"
 )
 
 # Codes for which we have webtext but no fonts:
@@ -37,7 +37,7 @@ BAS_FONTS = [
     "MisakiMincho",
     "PixelMplus10",
     "PixelMplus12",
-    "DotMatrix",
+    "DotMatrix weight=101",
     "lcdfont",
     "VL Gothic",
     "TakaoGothic",
@@ -100,7 +100,7 @@ def set_lang_specific_parameters(ctx, lang):
     MIX_LANG = "jpn"
     FONTS = ctx.fonts
     TEXT2IMAGE_EXTRA_ARGS = []
-    EXPOSURES = "-8 -4 0 4".split()
+    EXPOSURES = "-4 0 4".split()
     CHAR_SPACINGS = "0 0.7 1.4".split()
 
     GENERATE_WORD_BIGRAMS = None
@@ -110,6 +110,15 @@ def set_lang_specific_parameters(ctx, lang):
     NORM_MODE = 1
         
     # languages.
+    if lang == "eng":
+        MEAN_COUNT="15"
+        WORD_DAWG_FACTOR=0.015
+        GENERATE_WORD_BIGRAMS=0
+        TRAINING_DATA_ARGUMENTS+=["--infrequent_ratio=10000"]
+        TRAINING_DATA_ARGUMENTS+=["--no_space_in_output --desired_bigrams="]
+        FILTER_ARGUMENTS=["--charset_filter=eng --segmenter_lang=eng"]
+        if not FONTS:
+            FONTS = HEX_FONTS
     if lang == "hex":
         MEAN_COUNT="15"
         WORD_DAWG_FACTOR=0.015
@@ -119,6 +128,15 @@ def set_lang_specific_parameters(ctx, lang):
         FILTER_ARGUMENTS=["--charset_filter=hex --segmenter_lang=hex"]
         if not FONTS:
             FONTS = HEX_FONTS
+    elif lang == "jpn":
+        MEAN_COUNT="15"
+        WORD_DAWG_FACTOR=0.015
+        GENERATE_WORD_BIGRAMS=0
+        TRAINING_DATA_ARGUMENTS+=["--infrequent_ratio=10000"]
+        TRAINING_DATA_ARGUMENTS+=["--no_space_in_output --desired_bigrams="]
+        FILTER_ARGUMENTS=["--charset_filter=jpn --segmenter_lang=jpn"]
+        if not FONTS:
+            FONTS = N6X_FONTS
     elif lang == "n6x":
         MEAN_COUNT="15"
         WORD_DAWG_FACTOR=0.015
