@@ -1,13 +1,4 @@
 #!/bin/bash 
-function exitOnError(){
-if [ $? -ne 0 ]; then
-    echo "ERROR."
-    exit 1
-else
-    echo "SUCCESS."
-fi
-}
-
 if [ "$MINGW_CHOST" != "" ]; then
     SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
 else
@@ -15,22 +6,23 @@ else
 fi
 
 cd $SCRIPT_DIR
+source common.sh
 ../fonts/downloadFonts.sh
 
 mkdir -p $SCRIPT_DIR/tessdata_out
 mkdir -p $SCRIPT_DIR/tessdata_tmp/bas
 
-export PANGOCAIRO_BACKEND=fc 
+export PANGOCAIRO_BACKEND=fc
+FONTS_DIR=$SCRIPT_DIR/../fonts
 
 if [ ! -e $SCRIPT_DIR/tessdata_tmp/bas/bas.unicharset ]; then
 export TEXT2IMAGE_EXTRA_ARGS=""
-./tesstrain.sh \
---fonts_dir $SCRIPT_DIR/../fonts \
---lang n6x \
+./tesstrain.py \
+--fonts_dir $FONTS_DIR \
+--lang bas \
 --linedata_only \
+--distort_image \
 --noextract_font_properties \
---exposures "0 2 4 6 -2 -4 -6 -8 -10" \
---char_spacings "0.0 0.7 1.4" \
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \
 --output_dir $SCRIPT_DIR/tessdata_tmp 

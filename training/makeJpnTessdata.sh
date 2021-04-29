@@ -10,11 +10,10 @@ source common.sh
 ../fonts/downloadFonts.sh
 
 mkdir -p $SCRIPT_DIR/tessdata_out
-mkdir -p $SCRIPT_DIR/tessdata_tmp/jpn
+mkdir -p $SCRIPT_DIR/tessdata_tmp/n6x
 
-# export PANGOCAIRO_BACKEND=fc
+export PANGOCAIRO_BACKEND=fc
 FONTS_DIR=$SCRIPT_DIR/../fonts
-# fc-cache -fv $FONTS_DIR
 
 if [ ! -e $SCRIPT_DIR/tessdata_tmp/jpn/jpn.unicharset ]; then
 export TEXT2IMAGE_EXTRA_ARGS=""

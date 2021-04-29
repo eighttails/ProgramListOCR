@@ -12,9 +12,8 @@ source common.sh
 mkdir -p $SCRIPT_DIR/tessdata_out
 mkdir -p $SCRIPT_DIR/tessdata_tmp/n6x
 
-# export PANGOCAIRO_BACKEND=fc
+export PANGOCAIRO_BACKEND=fc
 FONTS_DIR=$SCRIPT_DIR/../fonts
-# fc-cache -fv $FONTS_DIR
 
 if [ ! -e $SCRIPT_DIR/tessdata_tmp/n6x/n6x.unicharset ]; then
 export TEXT2IMAGE_EXTRA_ARGS=""
@@ -27,7 +26,6 @@ export TEXT2IMAGE_EXTRA_ARGS=""
 --langdata_dir $SCRIPT_DIR/langdata \
 --tessdata_dir $SCRIPT_DIR/tessdata \
 --output_dir $SCRIPT_DIR/tessdata_tmp 
-
   
 exitOnError
 
