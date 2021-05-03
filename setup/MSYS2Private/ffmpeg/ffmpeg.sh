@@ -12,12 +12,12 @@ exitOnError
 }
 
 function build(){
-if [ -e $PREFIX/lib/libavcodec.a -a $((FORCE_INSTALL)) == 0 ]; then
+if [ -e $PREFIX/lib/libavcodec-private.a -a $((FORCE_INSTALL)) == 0 ]; then
 echo "FFMpeg is already installed."
 exit 0
 fi
 
-FFMPEG_VERSION=4.2.2
+FFMPEG_VERSION=4.3.1
 FFMPEG_SRC_DIR=ffmpeg-$FFMPEG_VERSION
 FFMPEG_BUILD_DIR=$FFMPEG_SRC_DIR-$BIT
 wget -c https://www.ffmpeg.org/releases/$FFMPEG_SRC_DIR.tar.xz
@@ -30,6 +30,7 @@ pushd $FFMPEG_BUILD_DIR
 ./configure \
 --target-os=mingw32 \
 --prefix=$PREFIX \
+--build-suffix=-private \
 --disable-shared \
 --enable-static \
 --pkg-config-flags=--static \
