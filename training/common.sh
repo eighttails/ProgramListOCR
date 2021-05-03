@@ -16,7 +16,7 @@ else
     SCRIPT_DIR=$(dirname $(readlink -f ${BASH_SOURCE:-$0}))
 fi
 
-pip3 install --user tqdm
+pip3 install --user tqdm psutil
 
 cd $SCRIPT_DIR
 ../fonts/downloadFonts.sh
