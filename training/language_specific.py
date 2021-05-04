@@ -97,10 +97,10 @@ def set_lang_specific_parameters(ctx, lang):
     MEAN_COUNT = 40  # Default for latin script.
     # Language to mix with the language for maximum accuracy. Defaults to eng.
     # If no language is good, set to the base language.
-    MIX_LANG = "jpn"
+    MIX_LANG = "eng"
     FONTS = ctx.fonts
     TEXT2IMAGE_EXTRA_ARGS = []
-    EXPOSURES = "-4 0 4".split()
+    EXPOSURES = "-3 -2 -1 0 1 2 3".split()
     CHAR_SPACINGS = "0 0.7 1.4".split()
 
     GENERATE_WORD_BIGRAMS = None
