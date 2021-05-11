@@ -126,6 +126,7 @@ def set_lang_specific_parameters(ctx, lang):
         TRAINING_DATA_ARGUMENTS+=["--infrequent_ratio=10000"]
         TRAINING_DATA_ARGUMENTS+=["--no_space_in_output --desired_bigrams="]
         FILTER_ARGUMENTS=["--charset_filter=hex --segmenter_lang=hex"]
+        CHAR_SPACINGS = ["0"]
         if not FONTS:
             FONTS = HEX_FONTS
     elif lang == "jpn":
