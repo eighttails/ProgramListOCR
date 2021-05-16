@@ -3,7 +3,7 @@ SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
 export PATH=$MINGW_PREFIX/local/bin:$PATH
 
 if [ "$1" == "" ]; then
-    VERSION="dev"
+    VERSION=$(cat $SCRIPT_DIR/VERSION)
 else
     VERSION=$1
 fi
