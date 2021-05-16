@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<Installer>   
-    <Name>Program List OCR</Name>   
-    <Version>1.5.1</Version>  
-    <Title>Program List OCR</Title>   
-    <Publisher>eighttails</Publisher>   
-    <StartMenuDir>Program List OCR</StartMenuDir>   
-    <TargetDir>@ApplicationsDir@/@ProductName@</TargetDir>   
-    <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters> 
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Program List OCR</Name>
+    <Version>1.5.2</Version>
+    <Title>Program List OCR</Title>
+    <Publisher>eighttails</Publisher>
+    <StartMenuDir>Program List OCR</StartMenuDir>
+    <TargetDir>@ApplicationsDir@/@ProductName@</TargetDir>
+    <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
     <MaintenanceToolName>Uninstaller</MaintenanceToolName>
 </Installer> 
