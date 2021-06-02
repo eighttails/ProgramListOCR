@@ -37,7 +37,7 @@ BAS_FONTS = [
     "MisakiMincho",
     "PixelMplus10",
     "PixelMplus12",
-    "DotMatrix weight=101",
+    # "DotMatrix weight=101",
     "lcdfont",
     "VL Gothic",
     "TakaoGothic",
@@ -100,7 +100,7 @@ def set_lang_specific_parameters(ctx, lang):
     MIX_LANG = "eng"
     FONTS = ctx.fonts
     TEXT2IMAGE_EXTRA_ARGS = []
-    EXPOSURES = "-3 -2 -1 0 1 2 3".split()
+    EXPOSURES = "-8 -6 -4 -2 0 2 4 6".split()
     CHAR_SPACINGS = "0 0.7 1.4".split()
 
     GENERATE_WORD_BIGRAMS = None
