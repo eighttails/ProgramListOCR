@@ -11,12 +11,14 @@ fi
 
 if [ "$MINGW_CHOST" != "" ]; then
     SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
-    pacman -S --noconfirm --needed $MINGW_PACKAGE_PREFIX-python-pip
+    pacman -S --noconfirm --needed \
+        $MINGW_PACKAGE_PREFIX-python-pip \
+        $MINGW_PACKAGE_PREFIX-python-psutil
+    pip3 install --user tqdm 
 else
     SCRIPT_DIR=$(dirname $(readlink -f ${BASH_SOURCE:-$0}))
+    pip3 install --user tqdm psutil
 fi
-
-pip3 install --user tqdm psutil
 
 cd $SCRIPT_DIR
 ../fonts/downloadFonts.sh
