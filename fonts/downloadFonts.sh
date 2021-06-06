@@ -6,6 +6,11 @@ else
 fi
 
 cd $SCRIPT_DIR
+#PET fonts
+if [ ! -d $SCRIPT_DIR/Commodore-PET ]; then
+wget -c https://www.ffonts.net/Commodore-PET.font.zip
+unzip -d Commodore-PET Commodore-PET.font.zip
+fi
 
 #DotMatrix
 if [ ! -d $SCRIPT_DIR/DotMatrix-Regular ]; then
@@ -80,7 +85,6 @@ if [ ! -d $SCRIPT_DIR/DumpListEditorVer037MSX0305 ]; then
 wget -c https://bugfire2009.ojaru.jp/DumpListEditorVer037MSX0305.zip
 unzip DumpListEditorVer037MSX0305.zip
 fi
-
 
 #Misaki fonts
 if [ ! -e $SCRIPT_DIR/misaki_ttf_2019-02-03a.zip ]; then

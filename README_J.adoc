@@ -108,10 +108,13 @@ PC-6001用BASICの場合は、拙作の http://eighttails.seesaa.net/article/305
 フォント自体の再配布を行うことはできないので、学習用スクリプト内でダウンロードして使用するようになっています。 +
 
 .DotMatrix
-https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
+https://www.ffonts.net/DotMatrix-Regular.font
 
 .GP4 LCD Font
 https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
+
+.Commodole-PET
+https://jp.ffonts.net/Commodore-PET.font
 
 .P6TrueTypeフォント
 Hashi様作 +
