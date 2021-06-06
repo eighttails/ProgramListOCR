@@ -55,7 +55,7 @@ BASE_FONTS = [
 BAS_FONTS = copy.deepcopy(BASE_FONTS)
 BAS_FONTS.extend([
     "DotMatrix weight=101",
-    "Commodore-PET",
+    "Commodore PET",
     "lcdfont",
 ])
 
