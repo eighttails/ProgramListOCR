@@ -21,6 +21,7 @@
 
 import logging
 import os
+import copy
 
 log = logging.getLogger(__name__)
 
@@ -32,13 +33,10 @@ VALID_LANGUAGE_CODES = (
 # Codes for which we have webtext but no fonts:
 UNUSABLE_LANGUAGE_CODES = ""
 
-BAS_FONTS = [
-    "MisakiGothic",
-    "MisakiMincho",
+# ASCIIをカバーしたフォント
+BASE_FONTS = [
     "PixelMplus10",
     "PixelMplus12",
-    # "DotMatrix weight=101",
-    "lcdfont",
     "VL Gothic",
     "TakaoGothic",
     "TakaoMincho",
@@ -52,8 +50,25 @@ BAS_FONTS = [
     "N-Font_Original",
     "MSX-FONT-Wide",
 ]
-N6X_FONTS = BAS_FONTS
+
+# ASCII特化フォント(ひらがなが出せない)
+BAS_FONTS = copy.deepcopy(BASE_FONTS)
+BAS_FONTS.extend([
+    "DotMatrix weight=101",
+    "Commodore-PET",
+    "lcdfont",
+])
+
 HEX_FONTS = BAS_FONTS
+
+# 国産BASIC特化フォント
+# 美咲フォントは半角文字が小さすぎるのでASCIIのみの言語には含めない
+# (ひらがな、グラフィック文字の学習に使いたい)
+N6X_FONTS = copy.deepcopy(BASE_FONTS)
+N6X_FONTS.extend([
+    "MisakiGothic",
+    "MisakiMincho",
+])
 
 VERTICAL_FONTS = []
 
@@ -97,10 +112,10 @@ def set_lang_specific_parameters(ctx, lang):
     MEAN_COUNT = 40  # Default for latin script.
     # Language to mix with the language for maximum accuracy. Defaults to eng.
     # If no language is good, set to the base language.
-    MIX_LANG = "eng"
+    MIX_LANG = "jpn"
     FONTS = ctx.fonts
     TEXT2IMAGE_EXTRA_ARGS = ["--invert=false"]
-    EXPOSURES = "-6 -4 -2 0 2 4 6".split()
+    EXPOSURES = "-8 -6 -4 -2 0 2 4 6".split()
     CHAR_SPACINGS = "0 0.7 1.4".split()
 
     GENERATE_WORD_BIGRAMS = None
@@ -108,52 +123,52 @@ def set_lang_specific_parameters(ctx, lang):
 
     LANG_IS_RTL = False
     NORM_MODE = 1
-        
+
     # languages.
     if lang == "eng":
-        MEAN_COUNT="15"
-        WORD_DAWG_FACTOR=0.015
-        GENERATE_WORD_BIGRAMS=0
-        TRAINING_DATA_ARGUMENTS+=["--infrequent_ratio=10000"]
-        TRAINING_DATA_ARGUMENTS+=["--no_space_in_output --desired_bigrams="]
-        FILTER_ARGUMENTS=["--charset_filter=eng --segmenter_lang=eng"]
+        MEAN_COUNT = "15"
+        WORD_DAWG_FACTOR = 0.015
+        GENERATE_WORD_BIGRAMS = 0
+        TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
+        TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
+        FILTER_ARGUMENTS = ["--charset_filter=eng --segmenter_lang=eng"]
         if not FONTS:
             FONTS = HEX_FONTS
     if lang == "hex":
-        MEAN_COUNT="15"
-        WORD_DAWG_FACTOR=0.015
-        GENERATE_WORD_BIGRAMS=0
-        TRAINING_DATA_ARGUMENTS+=["--infrequent_ratio=10000"]
-        TRAINING_DATA_ARGUMENTS+=["--no_space_in_output --desired_bigrams="]
-        FILTER_ARGUMENTS=["--charset_filter=hex --segmenter_lang=hex"]
+        MEAN_COUNT = "15"
+        WORD_DAWG_FACTOR = 0.015
+        GENERATE_WORD_BIGRAMS = 0
+        TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
+        TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
+        FILTER_ARGUMENTS = ["--charset_filter=hex --segmenter_lang=hex"]
         CHAR_SPACINGS = ["0"]
         if not FONTS:
             FONTS = HEX_FONTS
     elif lang == "jpn":
-        MEAN_COUNT="15"
-        WORD_DAWG_FACTOR=0.015
-        GENERATE_WORD_BIGRAMS=0
-        TRAINING_DATA_ARGUMENTS+=["--infrequent_ratio=10000"]
-        TRAINING_DATA_ARGUMENTS+=["--no_space_in_output --desired_bigrams="]
-        FILTER_ARGUMENTS=["--charset_filter=jpn --segmenter_lang=jpn"]
+        MEAN_COUNT = "15"
+        WORD_DAWG_FACTOR = 0.015
+        GENERATE_WORD_BIGRAMS = 0
+        TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
+        TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
+        FILTER_ARGUMENTS = ["--charset_filter=jpn --segmenter_lang=jpn"]
         if not FONTS:
             FONTS = N6X_FONTS
     elif lang == "n6x":
-        MEAN_COUNT="15"
-        WORD_DAWG_FACTOR=0.015
-        GENERATE_WORD_BIGRAMS=0
-        TRAINING_DATA_ARGUMENTS+=["--infrequent_ratio=10000"]
-        TRAINING_DATA_ARGUMENTS+=["--no_space_in_output --desired_bigrams="]
-        FILTER_ARGUMENTS=["--charset_filter=n6x --segmenter_lang=n6x"]
+        MEAN_COUNT = "15"
+        WORD_DAWG_FACTOR = 0.015
+        GENERATE_WORD_BIGRAMS = 0
+        TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
+        TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
+        FILTER_ARGUMENTS = ["--charset_filter=n6x --segmenter_lang=n6x"]
         if not FONTS:
             FONTS = N6X_FONTS
     elif lang == "bas":
-        MEAN_COUNT="15"
-        WORD_DAWG_FACTOR=0.015
-        GENERATE_WORD_BIGRAMS=0
-        TRAINING_DATA_ARGUMENTS+=["--infrequent_ratio=10000"]
-        TRAINING_DATA_ARGUMENTS+=["--no_space_in_output --desired_bigrams="]
-        FILTER_ARGUMENTS=["--charset_filter=bas --segmenter_lang=bas"]
+        MEAN_COUNT = "15"
+        WORD_DAWG_FACTOR = 0.015
+        GENERATE_WORD_BIGRAMS = 0
+        TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
+        TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
+        FILTER_ARGUMENTS = ["--charset_filter=bas --segmenter_lang=bas"]
         if not FONTS:
             FONTS = BAS_FONTS
 
