@@ -54,7 +54,7 @@ BASE_FONTS = [
 # ASCII特化フォント(ひらがなが出せない)
 BAS_FONTS = copy.deepcopy(BASE_FONTS)
 BAS_FONTS.extend([
-    "DotMatrix weight=101",
+    # "DotMatrix weight=101",
     "Commodore PET",
     "lcdfont",
 ])
@@ -115,7 +115,7 @@ def set_lang_specific_parameters(ctx, lang):
     MIX_LANG = "jpn"
     FONTS = ctx.fonts
     TEXT2IMAGE_EXTRA_ARGS = ["--invert=false"]
-    EXPOSURES = "-8 -6 -4 -2 0 2 4 6".split()
+    EXPOSURES = "-6 -4 -2 0 2 4 6".split()
     CHAR_SPACINGS = "0 0.7 1.4".split()
 
     GENERATE_WORD_BIGRAMS = None
@@ -141,7 +141,7 @@ def set_lang_specific_parameters(ctx, lang):
         TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
         TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
         FILTER_ARGUMENTS = ["--charset_filter=hex --segmenter_lang=hex"]
-        CHAR_SPACINGS = ["0"]
+        CHAR_SPACINGS = "0 0.7".split()
         if not FONTS:
             FONTS = HEX_FONTS
     elif lang == "jpn":
