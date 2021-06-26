@@ -115,7 +115,7 @@ def set_lang_specific_parameters(ctx, lang):
     MIX_LANG = "jpn"
     FONTS = ctx.fonts
     TEXT2IMAGE_EXTRA_ARGS = ["--invert=false"]
-    EXPOSURES = "-6 -4 -2 0 2 4 6".split()
+    EXPOSURES = "0 2 4 6 -2 -4 -6 -8 -10 -12".split()
     CHAR_SPACINGS = "0 0.7 1.4".split()
 
     GENERATE_WORD_BIGRAMS = None
