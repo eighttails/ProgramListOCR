@@ -75,7 +75,7 @@ def err_exit(msg):
 # Helper function to run a command and append its output to a log. Aborts early
 # if the program file is not found.
 # Usage: run_command CMD ARG1 ARG2...
-def run_command(cmd, *args, env=None, retry_count = 5):
+def run_command(cmd, *args, env=None, retry_count=5, exit_on_error=True):
     for d in ("", "api/", "training/"):
         testcmd = shutil.which(f"{d}{cmd}")
         if shutil.which(testcmd):
@@ -106,7 +106,8 @@ def run_command(cmd, *args, env=None, retry_count = 5):
                 proclog.error(proc.stdout.decode("utf-8", errors="replace"))
             except Exception as e:
                 proclog.error(e)
-            err_exit(f"Program {cmd} failed with return code {proc.returncode}. Abort. Command line: {cmd} {' '.join(args)}")
+            if exit_on_error:
+                err_exit(f"Program {cmd} failed with return code {proc.returncode}. Abort. Command line: {cmd} {' '.join(args)}")
         else:
             log.info(f"Retrying {cmd} {' '.join(args)}")
             time.sleep(10)
@@ -492,6 +493,8 @@ def phase_E_extract_features(ctx, box_config, ext, par_factor=2):
                 *box_config,
                 config,
                 env=tessdata_environ,
+                retry_count=0,
+                exit_on_error=False,
             )
             futures.append(future)
             time.sleep(1)
@@ -505,6 +508,7 @@ def phase_E_extract_features(ctx, box_config, ext, par_factor=2):
                 pbar.update(1)
     # Check that all the output files were produced.
     for img_file in img_files:
+        continue #チェックをスキップ(ファイルがなくても無視して続行)
         check_file_readable(pathlib.Path(img_file.with_suffix("." + ext)))
 
     return

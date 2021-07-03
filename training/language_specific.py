@@ -54,7 +54,7 @@ BASE_FONTS = [
 # ASCII特化フォント(ひらがなが出せない)
 BAS_FONTS = copy.deepcopy(BASE_FONTS)
 BAS_FONTS.extend([
-    # "DotMatrix weight=101",
+    "DotMatrix weight=101",
     "Commodore PET",
     "lcdfont",
 ])
