@@ -54,6 +54,7 @@ lstmtraining \
 --continue_from $SCRIPT_DIR/tessdata/eng.lstm \
 --traineddata $SCRIPT_DIR/tessdata_tmp/hex/hex.traineddata \
 --debug_interval -1 \
+--reset_learning_rate \
 --perfect_sample_delay 10 \
 --model_output $SCRIPT_DIR/tessdata_tmp/hex \
 --train_listfile $SCRIPT_DIR/tessdata_tmp/hex.training_files.txt \

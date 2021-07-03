@@ -56,6 +56,7 @@ lstmtraining \
 --continue_from $SCRIPT_DIR/tessdata/jpn.lstm \
 --traineddata $SCRIPT_DIR/tessdata_tmp/n6x/n6x.traineddata \
 --debug_interval -1 \
+--reset_learning_rate \
 --perfect_sample_delay 10 \
 --model_output $SCRIPT_DIR/tessdata_tmp/n6x \
 --train_listfile $SCRIPT_DIR/tessdata_tmp/n6x.training_files.txt \

@@ -57,6 +57,7 @@ lstmtraining \
 --continue_from $SCRIPT_DIR/tessdata/jpn.lstm \
 --traineddata $SCRIPT_DIR/tessdata_tmp/jpn/jpn.traineddata \
 --debug_interval -1 \
+--reset_learning_rate \
 --perfect_sample_delay 10 \
 --model_output $SCRIPT_DIR/tessdata_tmp/jpn \
 --train_listfile $SCRIPT_DIR/tessdata_tmp/jpn.training_files.txt \
