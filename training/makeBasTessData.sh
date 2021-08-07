@@ -6,4 +6,4 @@ else
 fi
 cd $SCRIPT_DIR
 
-./makeTessData.sh bas 2000000
+./makeTessData.sh bas 1000000
