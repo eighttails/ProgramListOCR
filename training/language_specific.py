@@ -115,7 +115,7 @@ def set_lang_specific_parameters(ctx, lang):
     MIX_LANG = "eng"
     FONTS = ctx.fonts
     TEXT2IMAGE_EXTRA_ARGS = ["--invert=false"]
-    EXPOSURES = "0 2 4 6 -2 -4 -6 -8 -10 -12".split()
+    EXPOSURES = "0 2 4 6 -2 -4 -6 -8 -10".split()
     CHAR_SPACINGS = "0 0.7 1.4".split()
 
     GENERATE_WORD_BIGRAMS = None
@@ -135,13 +135,6 @@ def set_lang_specific_parameters(ctx, lang):
         if not FONTS:
             FONTS = HEX_FONTS
     if lang == "hex":
-        MEAN_COUNT = "15"
-        WORD_DAWG_FACTOR = 0.015
-        GENERATE_WORD_BIGRAMS = 0
-        TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
-        TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
-        FILTER_ARGUMENTS = ["--charset_filter=hex --segmenter_lang=hex"]
-        CHAR_SPACINGS = "0 0.7".split()
         if not FONTS:
             FONTS = HEX_FONTS
     elif lang == "jpn":
@@ -154,21 +147,9 @@ def set_lang_specific_parameters(ctx, lang):
         if not FONTS:
             FONTS = N6X_FONTS
     elif lang == "n6x":
-        MEAN_COUNT = "15"
-        WORD_DAWG_FACTOR = 0.015
-        GENERATE_WORD_BIGRAMS = 0
-        TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
-        TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
-        FILTER_ARGUMENTS = ["--charset_filter=n6x --segmenter_lang=n6x"]
         if not FONTS:
             FONTS = N6X_FONTS
     elif lang == "bas":
-        MEAN_COUNT = "15"
-        WORD_DAWG_FACTOR = 0.015
-        GENERATE_WORD_BIGRAMS = 0
-        TRAINING_DATA_ARGUMENTS += ["--infrequent_ratio=10000"]
-        TRAINING_DATA_ARGUMENTS += ["--no_space_in_output --desired_bigrams="]
-        FILTER_ARGUMENTS = ["--charset_filter=bas --segmenter_lang=bas"]
         if not FONTS:
             FONTS = BAS_FONTS
 
