@@ -54,24 +54,32 @@ dos2unix $SCRIPT_DIR/tessdata_tmp/${LANGNAME}.training_files.txt
 
 lstmtraining \
 --traineddata $SCRIPT_DIR/tessdata_tmp/${LANGNAME}/${LANGNAME}.traineddata \
+--configfile $SCRIPT_DIR/langdata/${LANGNAME}/${LANGNAME}.config \
+--net_spec '[1,48,0,1 Ct3,3,16 Mp3,3 Lfys64 Lfx96 Lrx96 Lfx512 O1c1]' \
 --debug_interval -1 \
---net_spec '[1,0,0,1 Ct5,5,16 Mp3,3 Lfys64 Lfx128 Lrx128 Lfx256 O1c105]' \
 --perfect_sample_delay 10 \
 --model_output $SCRIPT_DIR/tessdata_tmp/${LANGNAME} \
 --train_listfile $SCRIPT_DIR/tessdata_tmp/${LANGNAME}.training_files.txt \
 --max_iterations=1000
 exitOnError
 
-# --net_spec '[1,48,0,1 Ct3,3,16 Mp3,3 Lfys64 Lfx96 Lrx96 Lfx512 O1c1]' \
+# --net_spec '[1,0,0,1 Ct5,5,16 Mp3,3 Lfys64 Lfx128 Lrx128 Lfx256 O1c105]' \
+# --debug_interval -1 \
 
 else
 
 lstmtraining \
 --traineddata $SCRIPT_DIR/tessdata_tmp/${LANGNAME}/${LANGNAME}.traineddata \
+--configfile $SCRIPT_DIR/langdata/${LANGNAME}/${LANGNAME}.config \
 --continue_from $SCRIPT_DIR/tessdata_tmp/${LANGNAME}_checkpoint \
 --model_output $SCRIPT_DIR/tessdata_out/${LANGNAME}.traineddata \
 --stop_training
 exitOnError
+
+pushd $SCRIPT_DIR/tessdata_out
+    combine_tessdata -o ${LANGNAME}.traineddata $SCRIPT_DIR/langdata/${LANGNAME}/${LANGNAME}.config
+    rm *.__tmp__
+popd
 
 cp $SCRIPT_DIR/tessdata_out/${LANGNAME}.traineddata $TESSDATA_PREFIX
 
@@ -79,6 +87,7 @@ START=$(date +%s)
 
 lstmtraining \
 --traineddata $SCRIPT_DIR/tessdata_tmp/${LANGNAME}/${LANGNAME}.traineddata \
+--configfile $SCRIPT_DIR/langdata/${LANGNAME}/${LANGNAME}.config \
 --debug_interval -1 \
 --perfect_sample_delay 10 \
 --continue_from $SCRIPT_DIR/tessdata_tmp/${LANGNAME}_checkpoint \

@@ -6,7 +6,7 @@ else
 fi
 cd $SCRIPT_DIR
 
-./makeTessData.sh n6x 1500000
+./makeTessData.sh n6x 2000000
 
 cd $SCRIPT_DIR/../finetuning
 ./finetune_n6x.sh
