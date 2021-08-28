@@ -108,7 +108,7 @@ def set_lang_specific_parameters(ctx, lang):
     FRAGMENTS_DISABLED = "y"
     RUN_SHAPE_CLUSTERING = False
     AMBIGS_FILTER_DENOMINATOR = "100000"
-    LEADING = 32
+    LEADING = 0
     MEAN_COUNT = 40  # Default for latin script.
     # Language to mix with the language for maximum accuracy. Defaults to eng.
     # If no language is good, set to the base language.
