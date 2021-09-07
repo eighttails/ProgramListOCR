@@ -9,5 +9,5 @@ cd $SCRIPT_DIR
 ./makeTessData.sh n6x 2000000
 
 cd $SCRIPT_DIR/../finetuning
-./finetune_n6x.sh
+# ./finetune_n6x.sh
 
