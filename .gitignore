@@ -11,3 +11,4 @@ finetuning/tessdata_finetuned
 *.log
 .vscode
 __pycache__
+core
