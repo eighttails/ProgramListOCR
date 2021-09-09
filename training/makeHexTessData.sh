@@ -6,7 +6,7 @@ else
 fi
 cd $SCRIPT_DIR
 
-./makeTessData.sh hex 700000
+./makeTessData.sh hex 1000000
 
-cd $SCRIPT_DIR/../finetuning
-./finetune_hex.sh
+# cd $SCRIPT_DIR/../finetuning
+# ./finetune_hex.sh
