@@ -18,7 +18,11 @@ mkdir -p $SCRIPT_DIR/tessdata_tmp/${LANGNAME}
 
 export PANGOCAIRO_BACKEND=fc
 FONTS_DIR=$SCRIPT_DIR/../fonts
+if [ "$MSYSTEM" != "" ];then
+export TESSDATA_PREFIX=$(which tesseract | sed -e 's|bin/tesseract|bin/tessdata|')
+else
 export TESSDATA_PREFIX=$(which tesseract | sed -e 's|bin/tesseract|share/tessdata|')
+fi
 
 if [ ! -e $SCRIPT_DIR/tessdata_tmp/${LANGNAME}/${LANGNAME}.unicharset ]; then
 export TEXT2IMAGE_EXTRA_ARGS=""

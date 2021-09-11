@@ -12,7 +12,11 @@ LANGNAME=$1
 FINAL_ITERATIONS=$2
 
 
+if [ "$MSYSTEM" != "" ];then
+export TESSDATA_PREFIX=$(which tesseract | sed -e 's|bin/tesseract|bin/tessdata|')
+else
 export TESSDATA_PREFIX=$(which tesseract | sed -e 's|bin/tesseract|share/tessdata|')
+fi
 export TESSDATA=$TESSDATA_PREFIX
 export MODEL_NAME=$LANGNAME
 export START_MODEL=$LANGNAME
