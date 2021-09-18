@@ -38,13 +38,13 @@ if [ "$TESSERACT_GIT" != "" ]; then
     pushd $TESSERACT_SRC_DIR
     git pull
 else
-    TESSERACT_VERSION=master
+    TESSERACT_VERSION=5.0.0-beta-20210916
     TESSERACT_TAG=$TESSERACT_VERSION
     TESSERACT_ARCHIVE=tesseract-$TESSERACT_TAG.tar.gz
     TESSERACT_SRC_DIR=tesseract-$TESSERACT_VERSION
     TESSERACT_BUILD_DIR=$TESSERACT_SRC_DIR-$BIT
 
-    if [ "$TESSERACT_VERSION" == "master" ]; then
+    if [ "$TESSERACT_VERSION" == "main" ]; then
     rm $TESSERACT_ARCHIVE 2> /dev/null
     fi
 
@@ -97,10 +97,10 @@ makeParallel && make install
 exitOnError
 
 pushd $PREFIX/bin/tessdata
-wget -c https://github.com/tesseract-ocr/tessdata_best/raw/master/eng.traineddata
-wget -c https://github.com/tesseract-ocr/tessdata_best/raw/master/jpn.traineddata
-wget -c https://github.com/tesseract-ocr/tessdata_best/raw/master/jpn_vert.traineddata
-wget -c https://github.com/tesseract-ocr/tessdata_best/raw/master/osd.traineddata
+wget -c https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata
+wget -c https://github.com/tesseract-ocr/tessdata_best/raw/main/jpn.traineddata
+wget -c https://github.com/tesseract-ocr/tessdata_best/raw/main/jpn_vert.traineddata
+wget -c https://github.com/tesseract-ocr/tessdata_best/raw/main/osd.traineddata
 popd
 
 popd
