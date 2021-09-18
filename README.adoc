@@ -63,7 +63,7 @@ ProgramListOCRSetup.exeをダブルクリックしてインストールします
 ////
 Launch "Program List OCR" -> "gImageReader" from the Start Menu.
 
-image::images/Image-120218-055039.703.png[]
+image::images/START.png[]
 
 === Operating instructions
 ==== Scan images and preprocessing
@@ -144,7 +144,7 @@ Note: if you change pages before recognition, the selected regions will be clear
 Drag mouse and select region to recognize. +
 You can add region by ctrl + mouse drag. 
 
-image::images/Image-130218-034520.789.png[]
+image::images/REGION.png[]
 
 ////
 選択が終わったら、ツールバー上の「Recocnize Selection」ボタンをクリックして読み取りを実行します。 +
@@ -170,7 +170,7 @@ image::images/Image-130218-043350.929.png[]
 ////
 When recognition is finished, recognized text appears in the right pane. 
 
-image::images/Image-130218-043350.929.png[]
+image::images/RESULT.png[]
 Copy and paste the text to your favorite text editor.
 
 ////

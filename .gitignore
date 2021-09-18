@@ -3,5 +3,12 @@ training/tessdata_tmp
 installer/worktree
 installer/*.exe
 fonts/*
+program_dataset*
+finetuning/tessdata
+finetuning/tessdata_finetuned
 *.swp
 *.lstm
+*.log
+.vscode
+__pycache__
+core

@@ -3,7 +3,7 @@ SCRIPT_DIR=$(cygpath -am $(dirname $(readlink -f ${BASH_SOURCE:-$0})))
 export PATH=$MINGW_PREFIX/local/bin:$PATH
 
 if [ "$1" == "" ]; then
-    VERSION="dev"
+    VERSION=$(cat $SCRIPT_DIR/VERSION)
 else
     VERSION=$1
 fi
@@ -57,8 +57,8 @@ windeployqt $PRODUCTDATA/bin/gimagereader-qt5.exe
 ntldd -R $PRODUCTDATA/bin/gimagereader-qt5.exe | sed "s|\\\|/|g" | grep "$(cygpath -am $MINGW_PREFIX)/" | sed -e "s/^.*=> \(.*\) .*/\1/" | xargs -I{} cp {} $PRODUCTDATA/bin/
 
 #学習済み言語データをコピー
-cp -r $SCRIPT_DIR/../training/tessdata_out $PRODUCTDATA/share/tessdata
-cp $SCRIPT_DIR/../training/tessdata/eng.traineddata $PRODUCTDATA/share/tessdata
+cp -r $MINGW_PREFIX/local/bin/tessdata $PRODUCTDATA/share/tessdata
+cp $SCRIPT_DIR/../training/tessdata_out/*.traineddata $PRODUCTDATA/share/tessdata
 
 #インストーラーをビルド
 cd $SCRIPT_DIR/worktree

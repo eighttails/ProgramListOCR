@@ -35,7 +35,7 @@ ProgramListOCRSetup.exeをダブルクリックしてインストールします
 === 起動方法
 スタートメニューから「Program List OCR」->「gImageReader」を選択するとOCRのGUIが起動します。
 
-image::images/Image-120218-055039.703.png[]
+image::images/START.png[]
 
 === 操作手順
 ==== 画像スキャン、前処理
@@ -76,10 +76,17 @@ image::images/OPEN.PNG[]
 このステップの操作は#1ページずつ#行ってください。 +
 読み取りを実行する前にページを移動すると選択範囲がクリアされてしまいます。
 ====
+
+画像の傾き、濃度調整はツールバーからも行えます。 +
+解像度(初期値は100)の値を300くらいまで上げると認識精度が向上する場合があります。 
+
+image::images/TOOLBAR_PREPROCESS.png[]
+
+
 プログラムリストとして読み取る範囲をドラッグして指定します。 +
 多段組になっていて読み取り範囲が複数ある場合はCTRL+ドラッグで選択範囲を追加できます。
 
-image::images/Image-130218-034520.789.png[]
+image::images/REGION.png[]
 
 選択が終わったら、ツールバー上の「Recocnize Selection」ボタンをクリックして読み取りを実行します。 +
 「Recocnize Selection」ボタンはプルダウンになっており、BASICプログラムを読み取る際は「bas」、PC-6001シリーズ用BASICプログラムを読み取る際は「n6x」、マシン語を読み取る際は「hex」を選択した状態で実行してください。
@@ -91,10 +98,15 @@ image::images/RECOGNIZE.PNG[]
 ==== テキスト整形
 読み取りが完了すると、右のペインに認識結果が現れます。
 
-image::images/Image-130218-043350.929.png[]
+image::images/RESULT.png[]
 このテキストをお好みのテキストエディタにコピー、ペーストしてください。
 
 この状態のテキストは行のつながりを認識できていません。印刷の都合で2行に折り返されてしまった行は分割して出力されているので、目視で連結してやる必要があります。 +
+
+認識結果の表示に使うフォントは設定で変更することができます。(ツールバー右端のアイコンよりPreferences→Output pane font) +
+お使いの機種のフォントを模したTrueTypeフォントがある場合はインストールしておくと認識結果が見やすくなると思います。
+
+image::images/PREFERENCES.png[]
 
 
 ==== 後処理
@@ -108,10 +120,13 @@ PC-6001用BASICの場合は、拙作の http://eighttails.seesaa.net/article/305
 フォント自体の再配布を行うことはできないので、学習用スクリプト内でダウンロードして使用するようになっています。 +
 
 .DotMatrix
-https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
+https://www.ffonts.net/DotMatrix-Regular.font
 
 .GP4 LCD Font
 https://br.maisfontes.com/download/81b2734e2b635abae5585d00ba4563ad
+
+.Commodole-PET
+https://jp.ffonts.net/Commodore-PET.font
 
 .P6TrueTypeフォント
 Hashi様作 +
@@ -165,7 +180,7 @@ MSYS2環境上でビルドします。 +
 . https://github.com/msys2/msys2-installer/releases[こちら]からMSYS2をダウンロードしてインストールしてください。 +
 VC++はサポートしていません。 +
 MSYS2はパッケージのバージョンアップが早く、またバージョンアップによるデグレードが非常に多いため、パッケージのアップデート(`pacman -Sy`)を行わず、バージョンを固定して使うことをおすすめします。作者がビルド、動作を確認しているのは以下のインストーラーで構築した環境です。(64ビット用) +
-https://github.com/msys2/msys2-installer/releases/download/2020-07-20/msys2-base-x86_64-20200720.sfx.exe
+https://github.com/msys2/msys2-installer/releases/download/2021-07-25/msys2-base-x86_64-20210725.sfx.exe
 . MSYSをインストールしたフォルダのmingw32.exe(32ビット版をビルドする場合)またはmingw64.exe(64ビット版をビルドする場合)を実行。 +
 . ダウンロードしたProgramListOCRのソースをMSYS上のホームフォルダに解凍。 +
 . `cd ProgramListOCR` を実行し、ソースフォルダにカレントを移動。 +
@@ -184,14 +199,14 @@ N6X-Basic用学習スクリプト
 `training/makeHexTessdata.sh`::
 16進ダンプリスト用学習スクリプト
 
-上記のスクリプトをbash上で実行すると、 `training/tessdata` フォルダに言語ファイルが生成されます。 +
+上記のスクリプトをbash上で実行すると、 `training/tessdata_out` フォルダに言語ファイルが生成されます。 +
 学習に要する時間ですが、ダンプリストの方は1日程度で収束しますが、BASICの方はError rateが0.1を切るぐらいまで(私の環境で1週間程度)は回し続ける必要があります。 +
 学習を終了するには適当なところでctrl+Cを押して強制的に止めてください。途中経過は保存されてますので、再度同じスクリプトを実行するとその時点から学習を再開します。
 
 === 言語ファイル作成方法
 ここでは、独自に言語ファイルを作成し、PC-6001以外の機種、またはBASIC以外のプログラムに対応させる方法を簡単に記述します。 +
-今回採用しているTesseract4.0はドキュメントも十分にありません。本当に使いこなすためには本家Githubのwikiやソースコード、issuesなどを読み込んでキャッチアップするのが不可欠です。 +
-https://github.com/tesseract-ocr/tesseract/wiki/TrainingTesseract-4.00
+今回採用しているTesseract5.0はドキュメントも十分にありません。本当に使いこなすためには本家Githubのwikiやソースコード、issuesなどを読み込んでキャッチアップするのが不可欠です。 +
+https://tesseract-ocr.github.io/tessdoc/
 
 学習に用いるスクリプトは `training` フォルダ、言語に関するデータは `training/langdata` に配置されています。 +
 P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(ここでは `xxx`)を作るには、
@@ -211,7 +226,7 @@ P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(�
 * `training/makeXXXTessdata.sh`
 ** スクリプト中の `n6x` を `xxx` に置換
 
-* `training/language-specific.sh`
+* `training/language-specific.py`
 ** スクリプト中の `N6X_FONTS` のリストに学習させたいフォント名を追加 +
 フォントは`fonts`フォルダ内にコピーすること。Windowsのシステムにインストールする必要はない。
 ** スクリプト中の `N6X` を `XXX` に置換
@@ -224,7 +239,7 @@ P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(�
 
 * `xxx.training_text`
 ** 学習に使用するテキストをコピー、ペーストする。
-** このテキストと `language-specific.sh` に定義されたフォントを用いて学習用の画像が生成される。
+** このテキストと `language-specific.py` に定義されたフォントを用いて学習用の画像が生成される。
 ** 実際のプログラムリストを使用することが望ましい。
 ** 実際のプログラムでは出現確率が低い文字は学習されない可能性があるため、冒頭にすべての文字を含んだ文字見本を入れておく。
 
@@ -239,28 +254,34 @@ P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(�
 
 
 == 更新履歴
-.1.5.1　2020/8/7
-* Tesseract,gImageReaderを更新 +
+.1.6.0　2020/09/XX
+* Tesseract,gImageReaderを更新
+* Tessractの更新により、認識が若干高速化
+* 本家Tesseractと同様に学習用スクリプトをbashからPythonに移行
+* 新規インストール時のデフォルト設定を修正
+
+.1.5.1　2020/08/07
+* Tesseract,gImageReaderを更新
 * スタートメニュー内のREADME_Jがリンク切れだったのを修正
 
-.1.5.0　2020/1/25
-* Tesseract,gImageReaderを更新 +
+.1.5.0　2020/01/25
+* Tesseract,gImageReaderを更新
 * 汎用欧文BASIC言語ファイルおよび英語版ドキュメントを追加
 
-.1.4.0　2019/7/11
-* Tesseract4.1.0の正式版に更新 +
+.1.4.0　2019/07/11
+* Tesseract4.1.0の正式版に更新
 * 学習するフォントを追加
 
-.1.3.0　2019/1/1
+.1.3.0　2019/01/01
 * 学習するフォントを追加
 
 .1.2.0　2018/11/10
-* Tesseract4.0.0,gImageReader3.3.0の正式版に更新 +
+* Tesseract4.0.0,gImageReader3.3.0の正式版に更新
 * 学習データ生成方法の見直し
 ** 文字間隔が多少開いていても読めるように学習。
 
 .1.1.0　2018/06/07
-* Tesseract,gImageReaderを更新 +
+* Tesseract,gImageReaderを更新
 * 学習データ生成方法の見直し
 ** にじんだ文字よりかすれた文字を優先して学習するよう画像を生成。
 ** 実際のプログラムリストの印刷状態に近づくよう、行間を密着させた画像を生成。
