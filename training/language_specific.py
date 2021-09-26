@@ -57,6 +57,8 @@ BAS_FONTS.extend([
     "Commodore PET",
     "lcdfont",
     "Verily Serif Mono",
+    "Arcade",
+    "Go Mono",
 ])
 
 HEX_FONTS = BAS_FONTS

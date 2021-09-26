@@ -6,6 +6,15 @@ else
 fi
 
 cd $SCRIPT_DIR
+#Go Mono
+wget -c https://github.com/golang/image/raw/master/font/gofont/ttfs/Go-Mono.ttf
+
+#Arcade-N
+if [ ! -d $SCRIPT_DIR/Arcade-N ]; then
+wget -c https://www.ffonts.net/Arcade-N.font.zip
+unzip -d Arcade-N Arcade-N.font.zip
+fi
+
 #PET fonts
 if [ ! -d $SCRIPT_DIR/Commodore-PET ]; then
 wget -c https://www.ffonts.net/Commodore-PET.font.zip

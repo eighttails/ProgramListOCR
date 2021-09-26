@@ -62,6 +62,11 @@ def setup_logging_logfile(logfile):
 
 
 def main():
+    par_factor = os.environ.get('PAR_FACTOR')
+    if not par_factor:
+        par_factor = psutil.cpu_count(logical=False)
+    else:
+        par_factor = int(par_factor)
     setup_logging_console()
     ctx = parse_flags()
     logfile = setup_logging_logfile(ctx.log_file)
@@ -73,11 +78,11 @@ def main():
     ctx = language_specific.set_lang_specific_parameters(ctx, ctx.lang_code)
 
     initialize_fontconfig(ctx)
-    phase_I_generate_image(ctx, par_factor=psutil.cpu_count(logical=False))
+    phase_I_generate_image(ctx, par_factor=par_factor)
     phase_UP_generate_unicharset(ctx)
 
     if ctx.linedata:
-        phase_E_extract_features(ctx, ["lstm.train"], "lstmf", par_factor=psutil.cpu_count(logical=False))
+        phase_E_extract_features(ctx, ["lstm.train"], "lstmf", par_factor=par_factor)
         make_lstmdata(ctx)
 
     log.removeHandler(logfile)
