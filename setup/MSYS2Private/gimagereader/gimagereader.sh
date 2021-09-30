@@ -64,7 +64,6 @@ fi
 
 #gImageReaderのデフォルト設定を変更
 patchOnce 1 $SCRIPT_DIR/customsettings.patch
-patchOnce 1 $SCRIPT_DIR/adaptive_threshold.patch
 
 rm -rf build
 mkdir build
