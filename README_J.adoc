@@ -254,7 +254,7 @@ P6用BASIC言語ファイル(`n6x`)をベースに新たに言語ファイル(�
 
 
 == 更新履歴
-.1.6.0　2020/09/XX
+.1.6.0　2020/09/30
 * Tesseract,gImageReaderを更新
 * Tessractの更新により、認識が若干高速化
 * 本家Tesseractと同様に学習用スクリプトをbashからPythonに移行
