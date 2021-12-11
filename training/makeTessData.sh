@@ -6,6 +6,7 @@ else
 fi
 cd $SCRIPT_DIR
 
+
 LANGNAME=$1
 MAX_ITERATIONS=10000
 FINAL_ITERATIONS=$2
@@ -18,6 +19,10 @@ mkdir -p $SCRIPT_DIR/tessdata_tmp/${LANGNAME}
 
 export PANGOCAIRO_BACKEND=fc
 FONTS_DIR=$SCRIPT_DIR/../fonts
+# フォント名を英語に固定する
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+
 if [ "$MSYSTEM" != "" ];then
 export TESSDATA_PREFIX=$(which tesseract | sed -e 's|bin/tesseract|bin/tessdata|')
 else
