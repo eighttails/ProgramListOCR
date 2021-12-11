@@ -38,7 +38,7 @@ if [ "$TESSERACT_GIT" != "" ]; then
     pushd $TESSERACT_SRC_DIR
     git pull
 else
-    TESSERACT_VERSION=5.0.0-beta-20210916
+    TESSERACT_VERSION=5.0.0
     TESSERACT_TAG=$TESSERACT_VERSION
     TESSERACT_ARCHIVE=tesseract-$TESSERACT_TAG.tar.gz
     TESSERACT_SRC_DIR=tesseract-$TESSERACT_VERSION
@@ -55,6 +55,9 @@ else
     tar xf $TESSERACT_ARCHIVE
     mv $TESSERACT_SRC_DIR $TESSERACT_BUILD_DIR
     pushd $TESSERACT_BUILD_DIR
+
+    #128ビットfloatのエラー回避
+    sed -i -e 's/#  undef __STRICT_ANSI__//' src/training/pango/pango_font_info.cpp
 fi
 
 if [ -e Makefile ]; then

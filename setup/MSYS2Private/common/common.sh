@@ -35,7 +35,7 @@ function makeParallel(){
 #並列ビルドの場合依存関係でビルドに失敗することがあるので3回までmakeする。
 for (( i=0; i<3; i++))
 do
-    make -j$(($(nproc)*2)) "$@"
+    nice make -j$(($(nproc)*2)) "$@"
     if [ $? -eq 0 ]; then
         return 0
     fi
@@ -47,7 +47,7 @@ function mingw32MakeParallel(){
 #並列ビルドの場合依存関係でビルドに失敗することがあるので3回までmakeする。
 for (( i=0; i<3; i++))
 do
-    mingw32-make -j$(($(nproc)*2)) "$@"
+    nice mingw32-make -j$(($(nproc)*2)) "$@"
     if [ $? -eq 0 ]; then
         return 0
     fi
@@ -126,11 +126,14 @@ if [ "$MINGW_CHOST" = "i686-w64-mingw32" ]; then
         export BIT='32bit'
         export ARCH='x86'
     NEEDED_DLLS='libgcc_s_dw2-1.dll libstdc++-6.dll libwinpthread-1.dll zlib1.dll'
-else
+elif [ "$MINGW_CHOST" = "x86_64-w64-mingw32" ]; then
     #64bit
         export BIT='64bit'
         export ARCH='x64'
     NEEDED_DLLS='libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll zlib1.dll'
+else
+    echo Unknown MINGW_CHOST valiable. [$MINGW_CHOST]
+    exit 1
 fi
 cp -f $NEEDED_DLLS $PREFIX/bin
 popd
