@@ -110,13 +110,13 @@ def set_lang_specific_parameters(ctx, lang):
     FRAGMENTS_DISABLED = "y"
     RUN_SHAPE_CLUSTERING = False
     AMBIGS_FILTER_DENOMINATOR = "100000"
-    LEADINGS = "-6 0".split()
     MEAN_COUNT = 40  # Default for latin script.
     # Language to mix with the language for maximum accuracy. Defaults to eng.
     # If no language is good, set to the base language.
     MIX_LANG = "eng"
     FONTS = ctx.fonts
     TEXT2IMAGE_EXTRA_ARGS = ["--invert=false"]
+    LEADINGS = "-6 0".split()
     EXPOSURES = "0 2 4 -2 -4 -6".split()
     CHAR_SPACINGS = "0 0.7 1.4".split()
 

@@ -93,9 +93,14 @@ def run_command(cmd, *args, env=None, retry_count=5, exit_on_error=True):
         # if isinstance(arg, pathlib.WindowsPath):
         args[idx] = str(arg)
 
-    proc = subprocess.run(
-        [cmd, *args], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env
-    )
+    try:
+        proc = subprocess.run(
+            [cmd, *args], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env
+        )
+    except:
+        if exit_on_error:
+            err_exit(f"Program {cmd} failed to launch. Abort. Command line: {cmd} {' '.join(args)}")
+
     proclog = logging.getLogger(cmd)
     if proc.returncode == 0:
         proclog.debug(proc.stdout.decode("utf-8", errors="replace"))
