@@ -55,9 +55,6 @@ else
     #64bit環境で生成されるオブジェクトファイルが巨大すぎでビルドが通らない問題へのパッチ
     sed -i -e "s|QMAKE_CFLAGS           = |QMAKE_CFLAGS         = -Wa,-mbig-obj |g" qtbase/mkspecs/win32-g++/qmake.conf
 
-    #プリコンパイル済みヘッダーが巨大すぎでビルドが通らない問題へのパッチ
-    sed -i -e "s| precompile_header||g" qtbase/mkspecs/win32-g++/qmake.conf
-
     #gcc11対応パッチ
     GCC_CXXFLAGS="-include $(cygpath -am $MINGW_PREFIX/include/c++/*/limits)"
     sed -i -e "s|QMAKE_CXXFLAGS         += |QMAKE_CXXFLAGS         += $GCC_CXXFLAGS |g" qtbase/mkspecs/win32-g++/qmake.conf
@@ -73,7 +70,6 @@ QT_COMMON_CONF_OPTS+=("-silent")
 QT_COMMON_CONF_OPTS+=("-platform" "win32-g++")
 QT_COMMON_CONF_OPTS+=("-optimize-size")
 QT_COMMON_CONF_OPTS+=("-pkg-config")
-QT_COMMON_CONF_OPTS+=("-no-pch")
 QT_COMMON_CONF_OPTS+=("QMAKE_CXXFLAGS+=-Wno-deprecated-declarations")
 QT_COMMON_CONF_OPTS+=("-no-direct2d")
 QT_COMMON_CONF_OPTS+=("-no-wmf")
