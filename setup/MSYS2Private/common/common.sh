@@ -76,8 +76,9 @@ zip \
 perl \
 python \
 ruby \
-autoconf-archive \
+intltool \
 $MINGW_PACKAGE_PREFIX-toolchain \
+$MINGW_PACKAGE_PREFIX-autotools \
 $MINGW_PACKAGE_PREFIX-cmake \
 $MINGW_PACKAGE_PREFIX-curl \
 2>/dev/null
