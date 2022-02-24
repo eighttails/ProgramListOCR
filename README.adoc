@@ -152,7 +152,8 @@ image::images/REGION.png[]
 ////
 When you have finished selecting your region, click "Recognize Selection" to execute recognition. +
 "Recognize Selection" is pull-down button and you can select language here. +
-If you want to recognize BASIC program listing choose "bas". If you want to recognize hexadecimal program listing, e.g. MLX format choose "hex". 
+If you want to recognize BASIC program listing choose "bas". If you want to recognize hexadecimal program listing, e.g. MLX format choose "hex". +
+Make sure to set the Language data locations to System-wide paths within the settings.
 
 image::images/RECOGNIZE.PNG[]
 
