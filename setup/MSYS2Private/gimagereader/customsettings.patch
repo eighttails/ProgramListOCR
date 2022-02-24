@@ -12,7 +12,7 @@ index 149ba07a..5340ba10 100644
  SET(PACKAGE_LOCALE_DIR "${CMAKE_INSTALL_PREFIX}/share/locale")
  
 diff --git a/qt/src/Config.cc b/qt/src/Config.cc
-index c355ca7f..6fb12965 100644
+index c355ca7f..8993b099 100644
 --- a/qt/src/Config.cc
 +++ b/qt/src/Config.cc
 @@ -82,12 +82,12 @@ Config::Config(QWidget* parent)
@@ -20,8 +20,9 @@ index c355ca7f..6fb12965 100644
  	connect(ui.comboBoxDataLocation, qOverload<int>(&QComboBox::currentIndexChanged), this, &Config::setDataLocations);
  
 -	ADD_SETTING(SwitchSetting("dictinstall", ui.checkBoxDictInstall, true));
+-	ADD_SETTING(SwitchSetting("updatecheck", ui.checkBoxUpdateCheck, true));
 +	ADD_SETTING(SwitchSetting("dictinstall", ui.checkBoxDictInstall, false));
- 	ADD_SETTING(SwitchSetting("updatecheck", ui.checkBoxUpdateCheck, true));
++	ADD_SETTING(SwitchSetting("updatecheck", ui.checkBoxUpdateCheck, false));
  	ADD_SETTING(SwitchSetting("openafterexport", ui.checkBoxOpenAfterExport, false));
  	ADD_SETTING(TableSetting("customlangs", ui.tableWidgetAdditionalLang));
 -	ADD_SETTING(SwitchSetting("systemoutputfont", ui.checkBoxDefaultOutputFont, true));
