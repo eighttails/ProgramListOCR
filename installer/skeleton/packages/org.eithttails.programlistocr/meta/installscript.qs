@@ -32,10 +32,10 @@ Component.prototype.createOperations = function()
                              , "iconId=2")
       //実行ファイル用のショートカット
       component.addOperation("CreateShortcut"
-                             , "@TargetDir@/bin/gimagereader-qt5.exe"
+                             , "@TargetDir@/bin/gimagereader-qt6.exe"
                              , "@StartMenuDir@/gImageReader.lnk"
                              , "workingDirectory=@TargetDir@"
-                             , "iconPath=@TargetDir@/bin/gimagereader-qt5.exe"
+                             , "iconPath=@TargetDir@/bin/gimagereader-qt6.exe"
                              , "iconId=0")
 
     }

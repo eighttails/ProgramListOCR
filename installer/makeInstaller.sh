@@ -51,10 +51,10 @@ popd
 GIMAGEREADER_PREFIX=$PRODUCTDATA $SCRIPT_DIR/../setup/MSYS2Private/gimagereader/gimagereader.sh
 
 #Qtの依存ライブラリを集約する
-windeployqt $PRODUCTDATA/bin/gimagereader-qt5.exe
+windeployqt $PRODUCTDATA/bin/gimagereader-qt6.exe
 
 #Qt以外の依存ライブラリを集約する
-ntldd -R $PRODUCTDATA/bin/gimagereader-qt5.exe | sed "s|\\\|/|g" | grep "$(cygpath -am $MINGW_PREFIX)/" | sed -e "s/^.*=> \(.*\) .*/\1/" | xargs -I{} cp {} $PRODUCTDATA/bin/
+ntldd -R $PRODUCTDATA/bin/gimagereader-qt6.exe | sed "s|\\\|/|g" | grep "$(cygpath -am $MINGW_PREFIX)/" | sed -e "s/^.*=> \(.*\) .*/\1/" | xargs -I{} cp {} $PRODUCTDATA/bin/
 
 #学習済み言語データをコピー
 cp -r $MINGW_PREFIX/local/bin/tessdata $PRODUCTDATA/share/tessdata
