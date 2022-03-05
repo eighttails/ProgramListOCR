@@ -51,7 +51,7 @@ popd
 GIMAGEREADER_PREFIX=$PRODUCTDATA $SCRIPT_DIR/../setup/MSYS2Private/gimagereader/gimagereader.sh
 
 #Qtの依存ライブラリを集約する
-windeployqt $PRODUCTDATA/bin/gimagereader-qt6.exe
+windeployqt-qt6 $PRODUCTDATA/bin/gimagereader-qt6.exe
 
 #Qt以外の依存ライブラリを集約する
 ntldd -R $PRODUCTDATA/bin/gimagereader-qt6.exe | sed "s|\\\|/|g" | grep "$(cygpath -am $MINGW_PREFIX)/" | sed -e "s/^.*=> \(.*\) .*/\1/" | xargs -I{} cp {} $PRODUCTDATA/bin/
