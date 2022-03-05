@@ -4,6 +4,7 @@ function prerequisite(){
 #必要ライブラリ
 pacman "${PACMAN_INSTALL_OPTS[@]}" \
 $MINGW_PACKAGE_PREFIX-qt6-base \
+$MINGW_PACKAGE_PREFIX-qt6-tools \
 $MINGW_PACKAGE_PREFIX-enchant \
 2>/dev/null
 
