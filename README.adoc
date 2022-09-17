@@ -171,7 +171,7 @@ image::images/Image-130218-043350.929.png[]
 ////
 When recognition is finished, recognized text appears in the right pane. 
 
-image::images/RESULT.png[]
+image::images/RESULT.PNG[]
 Copy and paste the text to your favorite text editor.
 
 ////
