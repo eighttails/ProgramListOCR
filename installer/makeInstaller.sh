@@ -58,7 +58,8 @@ ntldd -R $PRODUCTDATA/bin/gimagereader-qt6.exe | sed "s|\\\|/|g" | grep "$(cygpa
 
 #学習済み言語データをコピー
 cp -r $MINGW_PREFIX/local/bin/tessdata $PRODUCTDATA/share/tessdata
-cp $SCRIPT_DIR/../training/tessdata_out/*.traineddata $PRODUCTDATA/share/tessdata
+cp $SCRIPT_DIR/../training/tessdata_out/*.traineddata $SCRIPT_DIR/traineddata 
+cp $SCRIPT_DIR/traineddata/*.traineddata $PRODUCTDATA/share/tessdata
 
 #インストーラーをビルド
 cd $SCRIPT_DIR/worktree
