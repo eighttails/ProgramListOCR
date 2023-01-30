@@ -65,3 +65,5 @@ cp $SCRIPT_DIR/traineddata/*.traineddata $PRODUCTDATA/share/tessdata
 cd $SCRIPT_DIR/worktree
 binarycreator -v -f -c config/config.xml -p packages ../ProgramListOCRSetup-$BIT-$VERSION.exe 
 
+#フォルダを開く
+start $(cygpath -am $SCRIPT_DIR)
