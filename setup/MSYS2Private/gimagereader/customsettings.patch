@@ -1,18 +1,20 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 149ba07a..5340ba10 100644
+diff --cc CMakeLists.txt
+index f7b3085b,5340ba10..00000000
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -9,7 +9,7 @@ SET(ENV{LC_ALL} "C")
- 
- # Project properties
- PROJECT(gimagereader)
--SET(PACKAGE_NAME gImageReader)
-+SET(PACKAGE_NAME ProgramListOCR)
- SET(PACKAGE_VERSION 3.4.0)
- SET(PACKAGE_LOCALE_DIR "${CMAKE_INSTALL_PREFIX}/share/locale")
- 
+@@@ -9,8 -9,8 +9,8 @@@ SET(ENV{LC_ALL} "C"
+  
+  # Project properties
+  PROJECT(gimagereader)
+- SET(PACKAGE_NAME gImageReader)
++ SET(PACKAGE_NAME ProgramListOCR)
+ -SET(PACKAGE_VERSION 3.4.0)
+ +SET(PACKAGE_VERSION 3.4.1)
+  SET(PACKAGE_LOCALE_DIR "${CMAKE_INSTALL_PREFIX}/share/locale")
+  
+  
 diff --git a/qt/src/Config.cc b/qt/src/Config.cc
-index c355ca7f..8993b099 100644
+index 4d629e74..1aebce11 100644
 --- a/qt/src/Config.cc
 +++ b/qt/src/Config.cc
 @@ -82,12 +82,12 @@ Config::Config(QWidget* parent)
