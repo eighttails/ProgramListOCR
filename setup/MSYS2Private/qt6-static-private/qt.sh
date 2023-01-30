@@ -32,6 +32,8 @@ mkdir -p $QT6_STATIC_PREFIX/bin 2> /dev/null
 pushd $MINGW_PREFIX/bin
 cp -f $NEEDED_DLLS $QT6_STATIC_PREFIX/bin
 popd
+
+sed -e 's/-Dmain=SDL_main//g' $MINGW_PREFIX/lib/pkgconfig/sdl2.pc > $MINGW_PREFIX/lib/pkgconfig/sdl2_withqt.pc
 }
 
 # Use the right mkspecs file
@@ -50,11 +52,12 @@ apply_patch_with_msg() {
   done
 }
 
-function makeQtSourceTree(){
-#Qt
 QT_MAJOR_VERSION=6.2
 QT_MINOR_VERSION=.1
 QT_VERSION=$QT_MAJOR_VERSION$QT_MINOR_VERSION
+
+function makeQtSourceTree(){
+#Qt
 QT_ARCHIVE_DIR=qt-everywhere-src-$QT_VERSION
 QT_ARCHIVE=$QT_ARCHIVE_DIR.tar.xz
 QT_SOURCE_DIR=qt6-src-$1
@@ -145,6 +148,7 @@ cmake \
     -DFEATURE_optimize_size=ON \
     -DCMAKE_FIND_LIBRARY_SUFFIXES_OVERRIDE=".a;.dll.a" \
     -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS} -static -static-libgcc -static-libstdc++" \
+    -DBUILD_WITH_PCH=OFF \
     -DBUILD_SHARED_LIBS=OFF \
     -DQT_QMAKE_TARGET_MKSPEC=${_platform} \
     -DCMAKE_INSTALL_PREFIX=$(cygpath -am $QT6_STATIC_PREFIX) \
@@ -220,7 +224,7 @@ cmake \
 
 export PATH=$PWD/bin:$PATH
 
-cmake --build .
+nice -n19 cmake --build .
 exitOnError
 
 cmake --install .
