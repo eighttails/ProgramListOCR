@@ -2,8 +2,8 @@
 <Package>
     <DisplayName>Basic components</DisplayName>
     <Description>Compilation of gImageReader and OCR language files(Basic,Machine language)</Description>
-    <Version>1.7.2</Version>
-    <ReleaseDate>2022-02-24</ReleaseDate>
+    <Version>1.7.3</Version>
+    <ReleaseDate>2023-01-30</ReleaseDate>
     <Default>script</Default>
     <Licenses>
         <License name="gImageReader" file="GPLv3.txt" />

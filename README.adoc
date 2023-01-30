@@ -57,6 +57,9 @@ ProgramListOCRSetup.exeをダブルクリックしてインストールします
 . Double click ProgramListOCRSetup....exe
 . Follow the instructions of the installer.
 
+WARNING: Install fails if %TEMP% directory is assigned to RAM Disk. +
+Please detach RAM Disk before installing.
+
 === Start
 ////
 スタートメニューから「Program List OCR」->「gImageReader」を選択するとOCRのGUIが起動します。
